@@ -1,0 +1,97 @@
+
+
+/* Canvas do SVG flutuando à esquerda */
+#viz {
+    float: left;
+}
+
+#aviso p{
+    text-align: center;
+    color: #F00;
+}
+
+#credits {
+    clear: both;
+}
+
+#credits p {
+    padding-left: 7em;
+    font-size: 9pt;
+    color: #777;
+}
+
+#margem {
+    float: left;
+    width: 500px;
+}
+
+#resposta p {
+    padding-left: 3em;
+    font-size: 14pt;
+    color: #F00;
+}
+
+/* Bagulhos para tornar o formulário mais bonitinho */
+
+form {
+    width: 450px;
+    /* To see the outline of the form */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+}
+
+form div + div {
+    margin-top: 1em;
+}
+
+label {
+    /* To make sure that all label have the same size and are properly align */
+    display: inline-block;
+    width: 250px;
+    text-align: right;
+}
+
+/* Para o check exclusivo esquerda-direita */
+fieldset {
+    width: 250px;
+    margin: auto;
+}
+
+label.rd {
+    text-align: left;
+}
+
+input.rd {
+    width: 50px;
+}
+
+input {
+    /* To make sure that all text fields have the same font settings
+       By default, textareas have a monospace font */
+    font: 0.9em serif;
+
+    /* To give the same size to all text field */
+    width: 100px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    /* To harmonize the look & feel of text field border */
+    border: 1px solid #999;
+}
+
+input:focus {
+    /* To give a little highlight on active elements */
+    border-color: #000;
+}
+
+.button {
+    /* To position the buttons to the same position of the text fields */
+    padding-left: 150px; /* same size as the label elements */
+}
+
+button {
+    /* This extra margin represent roughly the same space as the space
+       between the labels and their text fields */
+    margin-left: .5em;
+}

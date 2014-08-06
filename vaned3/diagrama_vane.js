@@ -107,7 +107,7 @@ d3.select("#botao_calcula")
     .on("mousedown", 
 	function(d, i){
 	    var decl_opt = Number(document.getElementById("opcao").getAttribute("value"));
-	    console.log(decl_opt);
+
 	    if (decl_opt) {
 		ngdcDeclination();
 	    }
@@ -154,22 +154,18 @@ d3.select("#botao_download")
 
 function ngdcDeclination() {
 
-    var base_url = "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination";
-    var lat = readCoordForm("lat");
-    var lon = readCoordForm("lon");
+    var lat_d = gms2dec(readCoordForm("lat"));
+    var lon_d = gms2dec(readCoordForm("lon"));
 
-    var request = base_url 
-	+ "?lat1=" + lat.graus + " " + lat.minutos + " " + lat.segundos 
-	+ "&lon1=" + lon.graus + " " + lon.minutos + " " + lon.segundos 
-	+ "&resultFormat=xml";
+    var pathArr = window.location.href.split("/");
+    pathArr.pop();
+    var path = pathArr.join("/");
 
+    var geoMag = geoMagFactory(cof2Obj(syncXHR(path + '/WMM.COF')));
     
-    d3.xml(request,"application/xml", 
-	   function(e,xml) {
-	       console.log(e);
-	       console.log(xml.documentElement.getElementsByTagName("declination").value);
-	   })
-	.header("Access-Control-Allow-Origin: *");
+    var myGeoMag = geoMag(lat_d,lon_d,0);
+
+    document.getElementById("declinacao").value = myGeoMag.dec.toFixed(2);
     
 }
 
@@ -177,9 +173,9 @@ function readCoordForm(id) {
 
     var res = new Object;
     
-    res.graus = document.getElementById(id+"_graus").value;
-    res.minutos = document.getElementById(id+"_minutos").value;
-    res.segundos = document.getElementById(id+"_segundos").value;
+    res.graus = Number(document.getElementById(id+"_graus").value);
+    res.minutos = Number(document.getElementById(id+"_minutos").value);
+    res.segundos = Number(document.getElementById(id+"_segundos").value);
 
     return res;
 
@@ -448,5 +444,25 @@ function D2R(ang) {
 function R2D(ang) {
 
     return ang*180/Math.PI;
+
+}
+
+function gms2dec(coord) {
+    
+    var res = Math.abs(coord.graus);
+    res = res + Math.abs(coord.minutos)/60;
+    res = res + Math.abs(coord.segundos)/3600;
+    
+    return  invsign(coord.graus)*res;
+
+}
+
+function invsign(num) {
+    
+    if (Math.abs(num)==num) {
+	return -1;
+    } else {
+	return 1;
+    }
 
 }

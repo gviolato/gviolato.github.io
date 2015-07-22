@@ -1,0 +1,35 @@
+/*** Style for Load Run Follow-Up Table ***/
+
+#runcase-table {
+    font: 100% sans-serif;
+    empty-cells: show;
+}
+
+/* Shared Rules */
+#runcase-table th,
+#runcase-table td {
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+#runcase-table th.spanned {
+    text-align: center;
+}
+
+#runcase-table td.na {
+    background-color: #c0c0c0; /* Silver  */
+}
+
+#runcase-table td.miss {
+    background-color: #808000; /* Olive */
+}
+
+#runcase-table td.done {
+    background-color: #008000; /* Green */
+}
+
+#runcase-table td.fail {
+    background-color: #800000; /* Maroon */
+}

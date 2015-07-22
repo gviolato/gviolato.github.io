@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Diário EUA Nov14</title>
+  </head>
+
+  <body>
+
+    <div id="redacao">
+      
+      
+      <h1>Diário de Atividades NPS/Boston - Julho 2015</h1>
+      
+
+      <h2 id="day1">Dia 1: 07/07/2015</h2>
+      
+      <p> Manhã: Verificação do status de cálculo de carga CDR e planejamento
+	
+      <p> Tarde: Acesso à rede NPS, preparação para rodar os casos iniciais, tranferência de arquivos, criaçao dos primeiros arquivos sts.
+	
+	<h3>Fatos 07/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Mike mostrou como está o status dos cálculos até agora. Todos os casos já foram rodados, exceto os casos de overspeed 2.1a e 2.2a.</div>
+	  <li><div class="item" title="">Combinamos que dividiremos os trabalho de análise dos resultados. A ordem dos trabalhos será criar e revisar os sts (estatísticas gerais), criar e rodar os rainflow counts e finalmente criar os eevs para processar os documentos de carga.</div>
+	  <li><div class="item" title="">Ficou acertado que eu começaria análizando os resultados dos casos 2.1b,c,d e 2.2b,e,f, os quais já estão disponíveis na rede. Isto inclui, no moemtno</div>
+	  <li><div class="item" title="tools">Mike revisou a antiga planilha "Stats" do Excel, utilizada para rápida vizualização dos casos rodados, com o objetivo de identificar falhas na execução ou problemas com o modelo/controlador. O novo script deverá rodar mais rápido e gera todos os gráficos de forma mais adequada.</div>
+	  <li><div class="item" title="">Realizei ajustes ao Crunch Creator para rodar com nossa versão do Matlab e também ajustei o Excel para rodar as Stats (precisou trocar a casa decimal)</div>
+	</ul>
+
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Revisar o último diário em casa</div>
+	  <li><div class="item" title="ativ">Substituir as planilhas sts por um script IPython</div>
+	</ul>
+
+	
+	<h2 id="day2">Dia 2: 08/07/2015</h2>
+	
+      <p> Manhã: Verificação das Stats, Re-rodei o DLC2p1b, planejamento do script IPython para Stats.
+	
+      <p> Tarde: Terminei o Notebook IPython (Versão preliminar, ainda faltam várias coisas e verifiquei o DLC2p2b)
+	
+	<h3>Fatos 08/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title=""> Foi percebido que o DLC2p1b estava com problema, pois o Mike não zerou o torque de freio do controlador, fazendo-o freiar a turbina antes da parada total da máquina. Re-rodamos os DCLs 2p1b, 2p1i e 2p1j devido à isso. </div>
+	  <li><div class="item" title=""> Passei o resto do dia desenvolvendo das funções em Python e o Notebook para substituição da planilha 'Stats' do Excel (feita pelo NREL). Isto aumentou enormemente a velocidade com a qual consegue-se verificar os resultados das simulações, identificando problemas ou avaliando o comportamento da máquina. </div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Revisar o último diário em casa</div>
+	</ul>
+
+	<h2 id="day3">Dia 3: 09/07/2015</h2>
+	
+      <p> Manhã: Conferência dos casos 2p1 e 2p2 passados para mim. 
+	
+      <p> Tarde: Re-rodei o 2p2f (errado...), atendi a pedidos sobre o AGW2.1 (Janos-fundação ATS e Gabriel-suporte do Hub)
+	
+	<h3>Fatos 09/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="yawrunaway,dlc2p2e,dlc2p2f">Nos casos de yaw runaway o shutdown é definido pelo erro médio dos últimos quatro segundos. Devido ao sentido de rotação da turbina, os esforços não são simétricos e por isso o Mike definiu valores diferentes para o erro máximo tolerável positivo (45deg) e negativo (60deg). Isto diminiu as cargas extremas no topo da torre, mas fez com que as simulações do caso 2p2f (yaw runaway negativo) tivessem que ser re-simuladas com um tempo máximo maior.</div>
+	  <li><div class="item" title="">Eu fiquei reponsável por ressimular o DLC2p2f, mas devido a um erro no script que substituia o tempo final de 270 para 350 nos arquivos de entrada, eu gatei tempo re-simulando os mesmos casos. Deixei rodando no servidor da NPS durante a noite para re-analisar os casos amanhã. De qualquer forma, tudo parece estar funcionando bem.</div>
+	  <li><div class="item" title="mzglitch">Ajudei o Mike a reconhecer quais dos casos estacionados apresentam o problema de 'glitch' do momento Z do pitch. Será importante desenvolver um código para reconhecimento automático destes fenômenos no futuro, além de se investigar mais a fundo porque as simulações têm este problema.</div>
+	  <li><div class="item" title="mzglitch">Fora o caso 2p2f, já transferi os outros que ficaram sob minha responsabilidade para o servidor.</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Revisar o último diário em casa</div>
+	  <li><div class="item" title="ativ">Verificar se nós recebemos os shutdown definitions.</div>
+	</ul>
+
+	<h2 id="day4">Dia 4: 10/07/2015</h2>
+	
+      <p> Manhã: Apoio ao Janos - Cargas da Fundação da torre de concreto. 
+	
+      <p> Tarde: Criação de arquivos EEV para a pá e gerais.
+	
+	<h3>Fatos 10/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Utilizei o Crunch_Creator.m (script matlab criado pelo Mike) para criar e rodar os casos de carregamento extremo gerais e da pá para todos os DLCs que eu tinha no meu computador. (DLC2p1x e DLC2p2x)</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ"></div>
+	</ul>
+	
+	
+	<h2 id="day5">Dia 5: 13/07/2015</h2>
+	
+      <p> Manhã: Fora do escritório
+	
+      <p> Tarde: Reunião de planejamento da agenda com Jonathan. Geração dos Crunch files para os RCCs dos DLC4p1, DLC6p4a e DLC6p4b.
+
+	<h3>Fatos 10/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="rcc, template">Preparei um script Python para criação dos arquivos Crunch que geram os Rainflow Counts (*rcc) e utilizei-o para gerar os *.cru dos DLC4p1, DLC6p4a e b. </div>
+	  <li><div class="item" title="">Rodei os rcc's e os passei para o servidor</div>
+	  <li><div class="item" title="">Mike saiu mais cedo.</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Lembrar o Mike sobre a entrega da curva com o CT.</div>
+	  <li><div class="item" title="ativ">Enviar modelo de cálculo de rigidez da fundação para a Esteyco e garantir que eles entregarão algo parecido na próxima vez.</div>
+	</ul>
+	
+
+	<h2 id="day6">Dia 6: 14/07/2015</h2>
+	
+      <p> Manhã: Atendendo pedido do Elias quanto à curva de potência medida para o Protótipo Tractebel.
+	
+      <p> Tarde: Vi como são incluídos os arrastos de torre e Nacelle nas cargas da torre. Verificação dos RCCs gerados ontem, geração das root roses.
+	
+	<h3>Fatos 14/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="arrasto, torre">Os efeitos do vento são incluídos nas cargas em duas etapas. Na primeira, uma planilha com as características geométricas da torre e alguns coeficientes de arrasto pré-determinados (0.56 para a torre e algo que varia entre 0.8 e aprox 1.6 para a nacele, dependendo do erro de yaw - estes últimos provenientes de cálculos CFD da nacelle) são utilizados para se determinarem coeficientes de força de ação do vento sobre a estrutura nas diversas seções da torre. Na segunda etapa, novos canais são criados no Crunch onde a cada força e momento de cada seção da torre são somadas as forças aerodinâmicas, calculadas como o produto do coeficiente obtido na planilha anterior com o quadrado da velocidade do vento.</div>
+	  <li><div class="item" title="">Os RCCs são verificados utilizando uma planilha que poder ser obtida do site do NREL (eu acho). Comparando com os dados do PDR verifica-se um aumento geral das cargas de fadiga nos componentes, chegando a em torno de 6% nas pás e no eixo.</div>
+	  <li><div class="item" title="">A rosa de cargas extremas da raiz da pá é gerada de maneira direta com o Script "Crunch_Creator.m", do Mike.</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Enviar modelo de cálculo de rigidez da fundação para a Esteyco e garantir que eles entregarão algo parecido na próxima vez.</div>
+	</ul>
+
+	<h2 id="day7">Dia 7: 15/07/2015</h2>
+	
+      <p> Manhã: Repondi questionamento do Evandro sobre o relatório DEWI. Processei os RCCs para os DLC3p1 e DLC2p4.
+	
+      <p> Tarde: Adicionei o documento de cargas extremas do sistema. Mike criou o envelope de cargas comparando com o PDR.
+	
+	<h3>Fatos 15/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Criei uma página simples "loadruns.html" para realizar o acompanhamento das atividades de cálculo de cargas. A idéia é que um futuro programa gere versões desta tabela sozinho. </div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ"></div>
+	</ul>
+
+	<h2 id="day8">Dia 8: 16/07/2015</h2>
+	
+      <p> Manhã: Processamento dos dados da torre. Script para criação de arquivos de processamento dos canais da torre para geração de PMF's e posteriormente preenhcer as Exceedence Loads e Quasi-Permanent loads.
+	
+      <p> Tarde: Continuação do processamento de dados da torre. Curva de potência AGW2.1-110 tomou o resto do meu dia.
+	
+	<h3>Fatos 16/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Criei os histogramas de carregamento para as torres. Isto é feito de maneira relativamente direta pelo Crunch. Para se tomar os valores extremos para os bins, primeiro se roda as estatísticas agrupadas e com o resultado obtido monta-se um template para os arquivos de entrada (*.cru) que deverão ser gerados. Para cada velocidade simulada, geram-se crunch-de-histrogramas para todos os canais de carregamento da torre (Fx,Fy,Fxy,Mxy,My,...) e para todas as seções da mesma. (no processo de criação dos canais de saída, acrescenta-se os efeitos dos esforços aerodinâmicos, conforme descrito acima). Os arquivos são rodados e os resultados são importados para planilhas de excel ('TowerLoadHistograms*.xls') as quais servem para agrupar todos os resultados para uma dada componente de carga e calcular as cargas para os dados níveis de probabilidade. O resultado destas planilhas é então passado para a <span class="npsdoc" id="Tower Loads">planilha de cargas da torre</span>, componente por componente. </div>
+	  <li><div class="item" title="">Afim de auxiliar na criação de todos os arquivos de entrada no crunch acima descritos, utilizei o script de manipulação de templates *cru criado no dia 5, com algumas modificações. </div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ"></div>
+	</ul>
+	
+	<h2 id="day9">Dia 9: 17/07/2015</h2>
+	
+      <p> Manhã: Finalização dos resultados da curva de potência AGW2.1 utilizando hipóteses da NPS. Terminei as cargas quasi-permanentes e de excedência da torre.
+      <p> Tarde: Execução do documento de cargas do rolamento de Yaw. Conversamos sobre o modelamento dos efeitos de atrito e inércia da pá para o rolamento de Pitch.
+	
+	<h3>Fatos 17/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Mike verificou um problema com as cargas de fadiga na pá, causado pela rotina de início da máquina. Algo no controlador (que foi feito especialmente para este caso) está errado e o comportamento aparecendo após o segundo 250 de simulação (que é quando a máquina transiciona do procedimento de início para a operação normal) está muito discrepante. Mike verificou isso olhando os STS e as séries temporais. Solução: Limitar a análise para criação dos RCC até 250s de simulação.</div>
+	  <li><div class="item" title="">Mike descreveu em linhas gerais o processo que ele utiliza para calcular os esforços no rolamento de Pitch (principalmente a fadiga nos dentes da engrenagem) surgindo devido à efeitos de atrito no rolamento e inércia da pá. O momento de atrito é modelado de acordo com o sugerido pela Rothe-Erde e o efeito de inérica é somado posteriormente de acordo com um equacionamento interno da NPS (mas é física, como o Mike bem colocou). O canal Mz é então lido e modificado adequadamente pelo modelo, antes de ser considerado para o cálculo das cargas de fadiga. Os efeitos de atrito e inércia não são considerados para as cargas extremas no Pitch, mas o Mike supõe que estes sejam pequenos. Os efeitos dinâmicos do atuador não são considerados, embora exista uma dinâmica modelada no FAST, sublinhando a atuação do Pitch.</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ"></div>
+	</ul>
+
+	<h2 id="day10">Dia 10: 20/07/2015</h2>
+	
+      <p> Manhã: Melhoramentos nos notebooks de IPython para incluir botões. Processamento das cargas do 'raceway' para os rolamentos principais.
+	
+      <p> Tarde: 
+	
+	<h3>Fatos 20/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="notebook">Utilizando a classe 'widgets' do IPython, pude adicionar listas de escolha para o tipo de carga e parâmetro que deseja-se observar</div>
+	  <li><div class="item" title="bearings, raceway">Obtive a distribuição de cargas no eixo para utilização no cálculo de cargas de fadiga da pista ('raceway loads') dos rolamentos principais. Isto é feito utilizando-se o script 'BearingConglomerate', do Matlab, que faz a análise das cargas nos rolamentos. No caso das raceway loads (tanto Yaw quanto Main), o script apenas categoriza todos os instantes simulados para o DLC1p2 (são 12001*162=1944162 pontos) em bins para determinadas cargas 'chave'. No caso do rolamento de yaw essa carga é o 'YawBrMyp' e no caso do principal uma divisão recursiva por bins (em árvore) é feita nos componentes Fx->My->Mz, nesta ordem. Os resultados são impressos pelo código do Matlab em uma planilha, e depois transferidos para os documentos dos rolamentos de <span class="npsdoc" id="Yaw Bearing Loads">yaw</span> e <span class="npsdoc" id="Main Bearing Loads">principal</span>. </div>
+	  <li><div class="item" title="">Enquanto eu realizava estas atividades, Mike ficou trabalhando na mudança de estratégia de shutdown com alto erro de Yaw. Os DLCs 1p4 e 2p2f estão gerando cargas altas respectivamente no topo da torre e no momento de Pitch nos rolamentos das pás. Para reduzir o carregamento da torre, o Mike verificou que poderíamos diminuir o erro de yaw a partir do qual o shutdown deve acontecer, além disto, ele verificou que se a razão de pitch fosse diminuída a partir de um determinado valor de pitch (no momento 25°) de um shutdown rápido para um shutdown mais lento, então as cargas no topo da torre poderiam ser consideravelmente reduzidas para os diversos DLC's relevantes. Isto causou uma diminuição considerável nas cargas da torre, porém houve um aumento muito acentuado na carga de pitch do rolamento das pás, para o caso 2p2f. Agora, afim de chegar em níveis aceitáveis de carga para todos os casos, sem perder o trabalho já feito, ele está calibrando a estratégia de shutdown para casos de alto erro de yaw, levando em conta o erro de yaw, a velocidade média do vento, e finalmente o ângulo de pitch. Com isso, todas as cargas extremas estão 'on hold', até que este problema fique resolvido e todos os DLC's afetados sejam resimulados.</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Incluir interface de usuário no notebook de vizualização de séries temporais.</div>
+	</ul>
+
+	<h2 id="day11">Dia 11: 21/07/2015</h2>
+	
+      <p> Manhã: Compilação das acelerações da nacele
+	
+      <p> Tarde: Compilação das acelerações da nacele
+	
+	<h3>Fatos 21/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Mike ficou terminando os DLCs 1p4 e 2p2e,f com a nova estratégia de desligamento devido a alto erro de yaw. Ele terminou de analisar todos os dados, criar as estatísticas e cargas extremas para os casos 'finais'.</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Incluir interface de usuário no notebook de vizualização de séries temporais.</div>
+
+	</ul>
+
+	<h2 id="day12">Dia 12: 22/07/2015</h2>
+	
+      <p> Manhã: Terminei de compilar as acelerações extremas da nacele. Cálculo dos ciclos de fadiga para acelerações da nacele. 
+	
+      <p> Tarde: Terminei o documento de aceleração da nacele. Cálculo da diferença de geração para diversas temperaturas (Haral). Atualização da tabela de acompanhamento.
+	
+	<h3>Fatos 22/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Terminei script para obtenção das acelerações da nacelle. Isto ecomizará um dia como o de ontem e o transformará em alguns minutos.</div>
+	  <li><div class="item" title="">Verifiquei que os scripts matlab para cálculos de rolamento não são originais da NPS, mas sim criados pelo C. Hansen da Windward Engineering (o mesmo autor de um controlador TPC básico para simulações com o FAST) </div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Incluir interface de usuário no notebook de vizualização de séries temporais.</div>
+	  <li><div class="item" title="ativ">Voltando para o Brasil, fazer um benchmark das ferramentas mais utilizadas para cálculo e análise de dados de simulação e cargas de aerogeradores.</div>
+	</ul>
+
+	<!--	
+		
+		!!!! Lembrar o Mike sobre a entrega da curva com o CT. !!!!
+
+		<h2>Dia X: DD/MM/2014</h2>
+		
+      <p> Manhã: 
+	
+      <p> Tarde: 
+	
+	<h3>Fatos DD/MM/2014</h3>
+	
+	<ul>
+	  <li><div class="item" title=""> </div>
+	    <span class="npsdoc" id=""> </span>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ"></div>
+	</ul>
+	
+	-->
+	
+	
+	<!--
+
+	    Lista de ferramentas do Mike:
+
+	    Matlab.
+
+	    - Script para geração dos Inputs dos casos de carga (Não precisamos, faremos com python)
+	    - Script de extrapolação de dados (Não temos - Mike me passou os papers)
+	    - Script de cálculo da deflexão da pá (Não precisamos, já sei fazer com Python)
+	    - Script para geração dos Inputs do Crunch para Post-Processing - "Crunch_Creator" (Temos a partir do CDR)
+	    - Script de processamento de eventos extremos (Temos a partir do CDR) - "PenultimateAnalysis_5p1"
+	    - Script para o cálculo de carregamentos nos rolamentos (Temos a partir do CDR)
+	    - (NOVO) Script para rodar os Crunch's de eventos extremos de uma só vez.
+
+	    Excel.
+
+	    - Planilha de Estatísticas Gerais (Temos exemplo)
+	    - Planilha de DEL's e cálculo de fadiga (Temos exemplo)
+	    - Planilha com resumo de cargas e horas/carga para o Yaw (Sei fazer a partir do CDR)
+	    - Planilha TowerLoadHistograms_XX.xlsx (Temos a partir do CDR)
+	    - PSD (Densidade Espectral de Potência das Cargas) -> Principalmente para certificação (Ainda não temos mas é fácil fazer com Python. Montar esquema e verificar respostas contra resultados do CDR)
+	    - Time Series -> Principalmente para certificação
+	    
+	  -->
+
+	<!--
+	    
+	    Notas para o fluxograma de pós-processamento:
+	    
+	    - Geração dos arquivos Crunch para diversos casos de análise:
+	    .  * Stats dos arquivos individuais para análise de cada simulação (verificação de falhas, coerência estatística dos dados), para o caso geral
+	    .  * Stats agregadas dos carrementos distribuídos na torre (neste caso já somados com o arrasto aerodinâmico - via criação de novos canais) para fins de input nos casos de fadiga
+	    .  * Stats agregadas dos carrementos distribuídos na torre (neste caso já somados com o arrasto aerodinâmico - via criação de novos canais) com carregamentos em seus valores absolutos (lembrando aqui que valores absolutos só são relevantes neste caso pois a torre é axi-simétrica), para fins de input dos histogramas de carregamento quando do cálculo do nível de 99% de probabilidade de carregamento.
+	    .  * Stats agregadas dos carrementos distribuídos na pá para fins de input nos casos de fadiga
+	    .  * Eventos extremos para o caso geral, para as estações da pá e para as seções da torre - um eev é gerado para cada arquivo rodado.
+	    .  * RainFlow counts para todos os casos de análise de fadiga, agrupados em velocidades porém dividios nos diferentes inflows.
+	    
+	    . Obs: Isto inclui adicionar diversos canais extras para complementar as análises, como por exemplo adicionar as cargas de arrasto na torre ou apresentar as cargas da pá em diferentes sistemas de coordenadas
+
+	    - Compilação da deflexão máxima da pá quando ela passa próxima da torre para o cálculo do tip-clearance
+	    .  * Casos para checar a deflexão da pá em relação à torre (tip clearence): 1.3, 1.4, 1.5, 2.1a, b, c, d, a 2.2a, b, e, f, i, j , 2.3, 2.4b, 3.2, 3.3, 4.2, 5.1, 
+	    
+	    - Leitura das stats individuais em arquivos excel de processamento de estatísticas - não tem fins de apresentação de documentos, mas sim de verificação da coerências das simulações e análise dos dados de cada rodada.
+	    
+	    - Compilação dos eventos extremos nas tabelas de cargas extremas já com a realização das médias para os casos turbulentos e aplicação dos fatores de carga para o caso geral, para a distribuição de carregamentos da pá e para a distribuição de carregamentos na torre.
+	    
+	    - Importação dos RainflowCounts para as planilhas de excel afim de construir as matrizes de markov e calcular as DEL's para diferentes expoentes de material 'm'.
+	    
+	    - Planilha-documento de cargas da torre: Histograma e cálculo de nível de probabilidade de excedência, 
+	    
+	    - Extrapolação do caso estocásctico DLC1p1 (DCL1p2) para obtenção de cargas extrapoladas.
+	  -->
+	
+	<!--
+	    
+	    Programa do Mike para gerar arquivos do Crunch recebe:
+	    
+	    - Qual o caso de carga.
+	    - Quantas velocidades de vento
+	    - Qual o tipo de análise (Geral(Sts, eev), Blade(Sts, eev), Tower(Sts, eev), RainflowCount, PDF -> para os histogramas da torre)
+	    - Fazer análise agregada ou para cada arquivo
+
+	    E dá em sua saída todos os arquivos *.cru necessários para gerar as análises além dos batch files prontos para rodar o crunch com toda essa galera. (Já agrupando os arquivos pelo tamanho que ele supõe que o crunch vai aguentar.
+	    
+	  -->
+
+	<!--
+
+	    Programa do Mike para gerar arquivos de entrada no suite NREL (turbsim, IECWind, Aerodyn, Fast) recebe:
+
+	  -- Eng. Spec
+	  -- DLC Case
+	  -- DLC Matrix
+	  -- Input Database
+	  -- Blade Data File
+	  -- Sample AIN File
+	  -- Tower Data File
+	  -- Turbulence intensity
+	  -- Wind Class (Para velocidades extremas 1.3 (ETM), e casos 6 (EWM) e 7 (EWM))
+	  -- Density
+	  -- Usa ou não plataforma flexível
+	  -- Número de nós da torre
+	  -- Selecionar nós a utilizar da torre
+	  -- Selecionar nós a utilizar pá
+	  -- Gerar os arquivos de entrada.
+	     
+	     E dá em sua saída todos os arquivos de input que serão utilizados para rodar o determinado caso de carga.
+
+	  -->
+
+    </div>
+  </body>
+</html>

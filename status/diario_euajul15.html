@@ -241,17 +241,58 @@
 	  <li><div class="item" title="ativ">Voltando para o Brasil, fazer um benchmark das ferramentas mais utilizadas para cálculo e análise de dados de simulação e cargas de aerogeradores.</div>
 	</ul>
 
+	<h2 id="day13">Dia 13: 23/07/2015</h2>
+	
+      <p> Manhã: Reunião sobre definição de temperatura ambiente para downrating. Séries temporais para o PAS.
+	
+      <p> Tarde: Avancei na criação de uma interface básica com o usuário no notebook de vizualização de séries temporais. Correção das séries de torque no pitch para os casos 8.
+	
+	<h3>Fatos 23/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Início das atividades de backup dos cálculos de carga no HD externo.</div>
+	  <li><div class="item" title="PAS">Comecei a ver o processo de geração das séries temporais do sistema de pitch com o Mike: Primeiro o arquivo de estudo do rolamento é rodado para se obter as séries modificadas (incluindo efeitos de atrito e inércia das pás). Depois o script de análise dos máximos é rodado para se descobrir quais os casos críticos para torque, torque*velocidade e velocidade. No caso da velocidade, todos os casos de desligamento rápido possuem a mesma velocidade máxima para o sistema de pitch, portanto é escolhido o de maior torque entre esses casos. Das séries modificadas são extraídos os valores de torque máximo para os vários casos de operação desejados, e finalmente a série temporal de torque e velocidade. Esta série pode ser todo o caso de simulação que gerou o evento extremo, quando o mesmo vem de um DLC de operação normal com vento estocástico (i.e. DLC1p3), no caso da simulação ser de um evento extremo ou caso determinístico, então apenas o subperíodo dentro da simulação com o evento de interesse é colocado (normalmente algo em torno de 30s). Fatores parciais de carga são adicionados em todos os casos.</div>
+	  <li><div class="item" title="ativ">Colin, revisando os resultados preliminares, verificou que no DLC2p3 houve um erro na criação dos arquivos de entrada para geração das séries temporais de vento, de tal forma que os eventos só começavam no segundo 69 de simulação, e não no 67 como seria normal. Mike verificou que isto provavelmente não irá alterar os resultados de carregamento extremo, mas isso o fez ter que rodar mais 144 casos de simulação novos, para deixar as simulações completas. Devido às alterações da estratégia de shutdown, após rodar os casos ele precisará verificar o momento em que o pitch chega a 25° e depois rodar novamente incluindo a mudança de ângulo do pitch (ver aviso no topo do diário). Enquanto ele preparava estes últimos casos, eu me ofereci para rodar o script matlab para cálculo do torque no pitch system para os casos estacionários 8p1a-e e 8p2a.</div>	    
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Olhar mais a fundo sobre a biblioteca <a href="http://bokeh.pydata.org/">Bokeh</a> para vizualização de gráficos nos notebooks. Parece muito promissor.</div>
+	</ul>
+
+	<h2  id="day14">Dia 14: 24/07/2015</h2>
+	
+      <p> Manhã: Terminei de obter os torques extremos corrigidos para os casos 8. Continuei o bacup dos DLCs. Conferência sobre o sistema de Pitch e cálculos da MOOG.
+      <p> Tarde: Criação de script para verificação das séries com Mz Glitch. Conferência com Valentini
+	
+	<h3>Fatos 24/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="mzglitch,pitch"> Terminei de rodar o script para correção das séries de torque no pitch para os DLC8pX. Apenas não fiz os DLC8p1a,d pois eles são grandes demais e o Mike vai fazer direto do servidor. Notei que muitos deles eram afetados pelo problema numérico de "Glitch". Resolvi fazer um script para detectar esses picos ("spikes") e filtrá-los das siulações.</div>
+	  <li><div class="item" title="">Participei de uma conferência sobre os resultados da MOOG sobre o PAS com Garrett, Austin e Mike. Ainda há confusão sobre a utilização ou não dos fatores de carga pela MOOG nas séries temporais, assim como as hipóteses utilizadas para o cálculo final da energia necessária. Isto é devido à incompatibilidade entre o último relatório deles e a apresentação de PowerPoint, assim como as diferentes referências utilizadas nos gráficos apresentados. Fiquei responsável por formatar um e-mail à ser enviado para a MOOG, reforçando a necessidade de clareza na apresentação dos resultados.</div>
+	  <li><div class="item" title="">Terminei o script de filtragem do Pitch. Ele ainda está em fase de testes mas até agora não deu nenhum resultado falso positivo nem falso negativo. </div>
+	  <li><div class="item" title="">Fiz uma conferência com o Valentini sobre métodos de estimativa da curva de potência para o estudo de trade-off dos sistemas de resfriamento. </div>
+	  <li><div class="item" title="">Avanço nas ferramentas de análise de séries temporais utilizando o Bokeh</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Fazer e-mail para a MOOG</div>
+	</ul>
+
+
+	
 	<!--	
 		
 		!!!! Lembrar o Mike sobre a entrega da curva com o CT. !!!!
 
-		<h2>Dia X: DD/MM/2014</h2>
+		<h2  id="dayX">Dia X: DD/MM/2015</h2>
 		
       <p> Manhã: 
 	
       <p> Tarde: 
 	
-	<h3>Fatos DD/MM/2014</h3>
+	<h3>Fatos DD/MM/2015</h3>
 	
 	<ul>
 	  <li><div class="item" title=""> </div>

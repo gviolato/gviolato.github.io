@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">Viola.to Notes</title>
+  <id>./feed.xml</id>
+  <updated>2015-08-01T01:00:00Z</updated>
+  <link href="./archive.html" />
+  <link href="./archive.html" rel="self" />
+  <author>
+    <name>Gustavo Violato</name>
+  </author>
+  <generator>Werkzeug</generator>
+  <entry>
+    <title type="html">Sobre o ITA</title>
+    <id>viola.to/sobreoita.html</id>
+    <updated>2015-08-01T01:00:00Z</updated>
+    <link href="viola.to/sobreoita.html" />
+    <summary type="html">Entre 2004 e 2010 eu frequentei o Instituto Tecnológico de Aeronáutica - ITA, fazendo graduação e mestrado. Sempre tive vontade de registrar o que vi por lá, então seguem minhas impressões daquilo que vivi.</summary>
+  </entry>
+</feed>
+<!-- handrolled for excellence -->

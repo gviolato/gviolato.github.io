@@ -343,6 +343,27 @@
 	  <li><div class="item" title="ativ">Registrar todas as idéias de implementação de sistema automático de cálculo e análise de cargas.</div>
 	</ul>
 	
+	<h2  id="dayX">Dia 18: 30/07/2015</h2>
+		
+      <p> Manhã: Finalização do documento com cargas ao longo da pá para o MLA de povo novo. Finalização do backup de dados dos cálculos de CDR.
+	
+      <p> Tarde: Cálculo da deflexão máxima da pá próxima da torre
+	
+	<h3>Fatos 30/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">Deixei todos os arquivos de simulação e cálculo das cargas na raiz da pá para o MLA de povo novo no servidor para o Mike revisar. </div>
+	  <li><div class="item" title="">Preparei um documento formatado adequadamente com os resultados da distribuição das cargas ao longo da pá. </div>
+	  <li><div class="item" title="">Passei o resto do dia testando e corrigindo meu script para cálculo da deflexão máxima da pá quando próxima da torre. Havia um erro no algortimo (corrigido) e agora consegui compilar todos os resultados em uma planilha do excel. Eles estão levemente mais conservadores que os do Mike, pois estou considerando a corda da pá na ponta da mesma, enquanto ele considera apenas um ponto. Isto particamente dobra o setor ângular para procura das deflexões (Mike usa 5.5deg e eu estou usando 10.9def), mas altera apenas levemente o resultado final (algo em torno de 10cm a mais para o meu cálculo). </div>
+	  <li><div class="item" title="">Enquanto estava calculando as deflexões, achei um erro em um dos arquivos de simulação do DLC2p4b. Mike já corrigiu e ressimulou. </div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Terminar de automatizar o cálculo da deflexão máxima da pá próxima da torre.</div>
+	</ul>
+
+	
 	<!--	
 		
 		!!!! Lembrar o Mike sobre a entrega da curva com o CT. !!!!
@@ -402,12 +423,17 @@
 	    .  * Stats agregadas dos carrementos distribuídos na torre (neste caso já somados com o arrasto aerodinâmico - via criação de novos canais) para fins de input nos casos de fadiga
 	    .  * Stats agregadas dos carrementos distribuídos na torre (neste caso já somados com o arrasto aerodinâmico - via criação de novos canais) com carregamentos em seus valores absolutos (lembrando aqui que valores absolutos só são relevantes neste caso pois a torre é axi-simétrica), para fins de input dos histogramas de carregamento quando do cálculo do nível de 99% de probabilidade de carregamento.
 	    .  * Stats agregadas dos carrementos distribuídos na pá para fins de input nos casos de fadiga
-	    .  * Eventos extremos para o caso geral, para as estações da pá e para as seções da torre - um eev é gerado para cada arquivo rodado.
+	    .  * Eventos extremos para o caso geral, para as estações da pá (e rosa de carregamento na raiz) e para as seções da torre - um eev é gerado para cada arquivo rodado.
 	    .  * RainFlow counts para todos os casos de análise de fadiga, agrupados em velocidades porém dividios nos diferentes inflows.
+	    .  * Cálculo dos histogramas (*.pmf) da torre para as cargas Quasi-Permanetnes e de Excedência (isso inclui o arrasto, conforme notas).
+
+	    .  * Estudo de Fadiga de cada conjunto de rolamentos em separado para o DLC1p2
+	    .  * Identificação das acelerações extremas e contagem de "Raiflows" de aceleração do topo da torre
+	    .  * Construção das matrizes de carregamento extremo para todas as cargas a partir dos eventos extremos gerados (para o caso Geral, Pás (estações e rosa da raiz) e Torre)
 	    
 	    . Obs: Isto inclui adicionar diversos canais extras para complementar as análises, como por exemplo adicionar as cargas de arrasto na torre ou apresentar as cargas da pá em diferentes sistemas de coordenadas
 
-	    - Compilação da deflexão máxima da pá quando ela passa próxima da torre para o cálculo do tip-clearance
+	    - Compilação da deflexão máxima da pá quando ela passa próxima da torre para o cálculo do tip-clearance (+- 2.75 deg em relação ao azimute 180)
 	    .  * Casos para checar a deflexão da pá em relação à torre (tip clearence): 1.3, 1.4, 1.5, 2.1a, b, c, d, a 2.2a, b, e, f, i, j , 2.3, 2.4b, 3.2, 3.3, 4.2, 5.1, 
 	    
 	    - Leitura das stats individuais em arquivos excel de processamento de estatísticas - não tem fins de apresentação de documentos, mas sim de verificação da coerências das simulações e análise dos dados de cada rodada.
@@ -415,8 +441,6 @@
 	    - Compilação dos eventos extremos nas tabelas de cargas extremas já com a realização das médias para os casos turbulentos e aplicação dos fatores de carga para o caso geral, para a distribuição de carregamentos da pá e para a distribuição de carregamentos na torre.
 	    
 	    - Importação dos RainflowCounts para as planilhas de excel afim de construir as matrizes de markov e calcular as DEL's para diferentes expoentes de material 'm'.
-	    
-	    - Planilha-documento de cargas da torre: Histograma e cálculo de nível de probabilidade de excedência, 
 	    
 	    - Extrapolação do caso estocásctico DLC1p1 (DCL1p2) para obtenção de cargas extrapoladas.
 	  -->

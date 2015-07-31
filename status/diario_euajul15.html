@@ -343,7 +343,7 @@
 	  <li><div class="item" title="ativ">Registrar todas as idéias de implementação de sistema automático de cálculo e análise de cargas.</div>
 	</ul>
 	
-	<h2  id="dayX">Dia 18: 30/07/2015</h2>
+	<h2  id="day18">Dia 18: 30/07/2015</h2>
 		
       <p> Manhã: Finalização do documento com cargas ao longo da pá para o MLA de povo novo. Finalização do backup de dados dos cálculos de CDR.
 	
@@ -354,7 +354,7 @@
 	<ul>
 	  <li><div class="item" title="">Deixei todos os arquivos de simulação e cálculo das cargas na raiz da pá para o MLA de povo novo no servidor para o Mike revisar. </div>
 	  <li><div class="item" title="">Preparei um documento formatado adequadamente com os resultados da distribuição das cargas ao longo da pá. </div>
-	  <li><div class="item" title="">Passei o resto do dia testando e corrigindo meu script para cálculo da deflexão máxima da pá quando próxima da torre. Havia um erro no algortimo (corrigido) e agora consegui compilar todos os resultados em uma planilha do excel. Eles estão levemente mais conservadores que os do Mike, pois estou considerando a corda da pá na ponta da mesma, enquanto ele considera apenas um ponto. Isto particamente dobra o setor ângular para procura das deflexões (Mike usa 5.5deg e eu estou usando 10.9def), mas altera apenas levemente o resultado final (algo em torno de 10cm a mais para o meu cálculo). </div>
+	  <li><div class="item" title="">Passei o resto do dia testando e corrigindo meu script para cálculo da deflexão máxima da pá quando próxima da torre. Havia um erro no algortimo (corrigido) e agora consegui compilar todos os resultados em uma planilha do excel. Eles estão levemente mais conservadores que os do Mike, pois estou considerando a corda da pá na ponta da mesma, enquanto ele considera apenas um ponto. Isto praticamente dobra o setor ângular para procura das deflexões (Mike usa 5.5deg e eu estou usando 10.9def), mas altera apenas levemente o resultado final (algo em torno de 10cm a mais para o meu cálculo). </div>
 	  <li><div class="item" title="">Enquanto estava calculando as deflexões, achei um erro em um dos arquivos de simulação do DLC2p4b. Mike já corrigiu e ressimulou. </div>
 	</ul>
 	
@@ -363,12 +363,32 @@
 	  <li><div class="item" title="ativ">Terminar de automatizar o cálculo da deflexão máxima da pá próxima da torre.</div>
 	</ul>
 
+	<h2  id="day19">Dia 19: 31/07/2015</h2>
+		
+      <p> Manhã: Revisão do script de cálculo de deflexão da pá. Dicussão com o Jonathan sobre cálculo da curva de potência.
+	
+      <p> Tarde: Check e envio de cargas na pá para Povo Novo (MLA) para o Elias. Término do script para verificação de deflexão máxima da pá.
+	
+	<h3>Fatos 31/07/2015</h3>
+	
+	<ul>
+	  <li><div class="item" title="">O que está escrito acima sobre meu setor angular de procura ser maior que o do Mike está errado. Tinha um erro no meu cálculo que praticamente dobrava o setor ângular, portanto o setor de procura da NPS e o meu estão bastante parecidos agora.</div>
+	  <li><div class="item" title="">Terminei de alterar o script de cálculo de deflexão da pá, agora ele aceita argumentos da linha de comando e permite-se rodar de qualquer diretório e utilizar qualquer diretório como entrada para ler os arquivos. Experimentei com a biblioteca pyyaml para ler arquivos de configuração.</div>
+	  <li><div class="item" title="">Recebi o check do Mike sobre a apresentação das cargas ao longo da pá para Povo Novo, os cálculos estavam corretos, mas ele tinha alguns comentários sobre a apresnetação. O mais importante deles é que não deveríamos apresentar as cargas sem o fator de segurança.</div>
+	</ul>
+	
+	<h3>Minhas atividades:</h3>	
+	<ul>
+	  <li><div class="item" title="ativ">Implementar todas as rotinas de cálculo de cargas na WEG, automatizá-las e buscar a utilização de ferramentas mais precisas de cálculo/simulação.</div>
+	</ul>
+
+	<h3> FIM </h3>
 	
 	<!--	
 		
 		!!!! Lembrar o Mike sobre a entrega da curva com o CT. !!!!
 
-		<h2  id="dayX">Dia X: DD/MM/2015</h2>
+      <h2  id="dayX">Dia X: DD/MM/2015</h2>
 		
       <p> Manhã: 
 	

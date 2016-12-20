@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PARTY HARD</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css">
+    <script type="text/javascript" src="../js/spotify-web-api.js"></script>
+    <script type="text/javascript" src="../js/list.min.js"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+      emailjs.init("user_P44jA0ETjaYyhjTEVz9Nj");
+      })();
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+      div.table {
+      margin-left: 1cm;
+      }
+      div.vspace{
+      margin-bottom: 1cm;
+      }
+      input[type='checkbox'] {
+      -webkit-appearance:none;
+      width:15px;
+      height:15px;
+      background:white;
+      border-radius:5px;
+      border:2px solid #333;
+      }
+      input[class='chkall']:checked {
+      background: #7f7;
+      }
+      input[class='cbox']:checked {
+      background: #7f7;
+      }
+      input[class='unchkall']:checked {
+      background: #f77;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="table" id="playlist">
+
+      <h2>Votação da Playlist</h2>
+
+      <p>Leia rapidinho as instruções antes de começar.</p>
+      
+      <h4>Instruções:</h4>
+
+      <ul>
+	<li> <b>Enquanto votando, não recarregue a página!</b> Você irá perder os votos mais recentes, antes da última vez que você os tenha salvo.
+	<li> Por motivos técnicos<sup><a href="#fn1" id="ref1">1</a></sup>, você só pode salvar seus votos 10 vezes. Portanto,<b> seja econômico com o botão salvar.</b>
+	<li> Apesar do dito acima, como este site é <s>tosco</s> artesanal, <b>procure salvar mesmo assim</b>, digamos a cada 1 hora.
+	<li> O filtro abaixo funciona ao mesmo tempo para todos os campos. Use-o para procurar um amiguinho, um artista ou uma música, mas não todos ao mesmo tempo.
+	<li> Os botões "Tudo" e "Nada" do cabeçalho marcam e desmarcam apenas o que está sendo exibido num dado momento.
+	<li> Após terminar de votar, seus votos só estarão disponíveis depois de alguns minutos. Não se assuste se eles não estiverem aí ao recarregar a página imediamente após apertar o botão. Feche a página, vá mijar e volte pelo portal de login que eu mandei por whats.
+	<li> Obrigado por participar!<sup><a href="#fn2" id="ref2">2</a></sup>
+      </ul>
+      
+      <br>
+      <input class="search" placeholder="Filtro" />
+      <button class="sort" data-sort="artist">Ordenar por Artista</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button onclick="saveVotingState();">Salvar!</button>&nbsp;&nbsp;<span id="savemsg"></span>
+
+      <div class="vspace"></div>
+
+	<table class="pure-table pure-table-striped">
+	  <tr><th>Voto!</th><th>Quem adicionou?</th><th>Artista</th><th>Título</th></tr>
+	  <tr><th align="center"><input class="chkall" type="checkbox" onclick="checkAllVisible(this);"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="unchkall" type="checkbox" onclick="uncheckAllVisible(this);"/><br>Tudo Nada</th><th></th><th></th><th></th></tr>
+	  <tbody class="list">
+	  </tbody>
+	</table>
+      
+    </div>
+    <hr></hr>
+    <sup id="fn1">1. Peguei o plano grátis de um <a href="http://www.emailjs.com/" target="_newtab">site</a> que possibilita salvar as informações dos seus votos. Em conjunto, nós temos aproximadamente 150 envios permitidos.<a href="#ref1" title="Voltar para o texto.">↩</a></sup><br>
+
+    <sup id="fn2">2. Chupa, Rufus! Que feio duvidar dos amiguinhos.</sup><a href="#ref2" title="Voltar para o texto.">↩</a></sup></sup>
+
+
+    <script type="text/javascript" src="../js/renderplaylist.js"></script>
+
+  </body>
+</html>
+

@@ -220,8 +220,8 @@ spotifyApi.getMe()
 				     PLAYLISTID,
 				     {fields: ['total', 'limit']})
 	    .then(function(data) {
-		//var tot = data.total;
-		var tot = 50;
+		var tot = data.total;
+		//var tot = 50;
 		for (var off=0; off<tot; off=off+data.limit) {
 		    if ((off+data.limit)>=tot) {
 			curlimit=tot-off;

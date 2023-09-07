@@ -1,3 +1,4 @@
 assets/
+!site/assets/
 org/
 *.el

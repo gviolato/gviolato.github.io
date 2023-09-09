@@ -1,0 +1,23 @@
+#+HTML_HEAD: <link rel="stylesheet" href="./assets/css/tufte.css" type="text/css" />
+#+HTML_HEAD: <link rel="stylesheet" href="./assets/css/ox-tufte.css" type="text/css" />
+#+TITLE: Editorial
+
+* Em permanente construção
+
+#+begin_epigraph
+#+caption: Aristóteles
+#+BEGIN_QUOTE
+A educação tem raízes amargas, mas seus frutos são doces.
+#+END_QUOTE
+
+#+caption: Tiririca
+#+BEGIN_QUOTE
+Muitas vezes tentei fugir de mim, mas aonde eu ia, eu tava.
+#+END_QUOTE
+#+end_epigraph
+
+Por que diabos alguém escolhe dividir suas reflexões publicamente, particularmente em tempos tão hostis à qualquer reflexão que preste? Ainda pior se este alguém não considera ter nada particularmente engrandecedor para dividir com o público - que é meu caso.
+
+Um capricho, uma alucinação, excesso de tempo usado para procrastinar outras tarefas certamente mais relevantes ou um tantinho assim de falta de porrada? Sim. call_marginnote("um abraço pro Rastão e pro repórter boato.")
+
+Senhoras e senhores, aqui vos apresento minha jornada rumo a diminuição da minha própria ignorância.

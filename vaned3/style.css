@@ -1,0 +1,217 @@
+@import url(http://fonts.googleapis.com/css?family=Lusitana);
+
+/*Organização geral da página*/
+
+#pagina {
+    text-align: center;
+}
+
+#titulo {
+    margin: auto;
+    width: 1200px;
+}
+
+h1.titulo {
+    text-align: center;
+    color: #4E3434;
+    font-size:20pt;
+    font-family: 'Lusitana', serif;
+}
+
+/*Interface com o usuário e seus filhotes */
+
+#gui {
+    margin: auto;
+    width: 1200px;
+}
+
+
+#viz {
+    float: left;
+}
+
+#margem {
+    text-align: center;
+    float: left;
+    width: 550px;
+}
+
+/* Formulário de entrada de dados */
+
+p.aviso{
+    text-align: center;
+    color: #F00;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+form {
+    width: 450px;
+    margin: auto;
+    /* To see the outline of the form */
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    font-family: 'Lusitana', serif;
+}
+
+form div + div {
+    margin-top: 1em;
+}
+
+form.saida {
+
+    margin-top: 2em;
+    padding-bottom: 0.5em;
+
+}
+
+form label {
+    /* To make sure that all label have the same size and are properly align */
+    display: inline-block;
+    width: 250px;
+    text-align: right;
+    margin-left: 0px;
+}
+
+/* Para o check exclusivo esquerda-direita */
+fieldset {
+    width: 200px;
+    margin: auto;
+}
+
+label.rd {
+    text-align: left;
+}
+
+input.rd {
+    width: 50px;
+}
+
+div#coords{
+    text-align: center;
+}
+
+div#lat {
+    margin: auto;
+}
+
+div#lat label{
+    width: 125px;
+}
+
+div#lon {
+    margin: auto;
+}
+
+div#lon label{
+    width: 125px;
+}
+
+input.coordenada {
+
+    width: 35px;
+    font: 0.8em serif;
+    border: 1px solid #999;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+
+}
+
+input.coordenada#lat_segundos {
+
+    width: 40px;
+
+}
+
+input.coordenada#lon_segundos {
+
+    width: 40px;
+
+}
+
+input {
+    /* To make sure that all text fields have the same font settings
+       By default, textareas have a monospace font */
+    font: 0.9em serif;
+
+    /* To give the same size to all text field */
+    width: 100px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    /* To harmonize the look & feel of text field border */
+    border: 1px solid #999;
+}
+
+
+input:focus {
+    /* To give a little highlight on active elements */
+    border-color: #000;
+}
+
+div.opts {
+    display: inline-block;
+    width: 80px;
+}
+
+.button {
+    /* To position the buttons to the same position of the text fields */
+    margin: auto
+    font-family: 'Lusitana', serif;
+}
+
+button {
+    /* This extra margin represent roughly the same space as the space
+       between the labels and their text fields */
+    margin-bottom: .5em;
+    font-family: 'Lusitana', serif;
+    font-size: 11pt;
+}
+
+img.opt {
+    width: 16pt;
+    height: 16pt;
+    cursor: pointer;
+}
+
+
+a#botao_download {
+    color: #000;
+    background: #DDD;
+    border-radius: 0.15em;
+    border: 1px solid #777;
+    font-family: 'Lusitana', serif;
+    font-size: 11pt;
+    padding: 0.2em;
+}
+
+#botao_download:active {
+    background: #777;
+}
+
+.opcoes_aparencia {
+    margin-top: 1em;
+    text-align: left;
+}
+
+form.saida label {
+    text-align: left;
+    margin-left: 1em;
+}
+
+input#cotas {
+    width: 20px;
+}
+
+/*Creditos*/
+
+#credits {
+    margin: auto;
+    clear: both;
+    font-family: 'Lusitana', serif;
+}
+
+#credits p {
+    font-size: 9pt;
+    color: #777;
+}

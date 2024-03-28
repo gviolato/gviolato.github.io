@@ -42,7 +42,7 @@
 (defun print-blog-posts (dir)
   (with-output-to-string
     (dolist (fpath (file-expand-wildcards (format "%s/*blog.org" dir)))
-      (princ (format "  - [[file:%s][%s]]"
+      (princ (format "  - [[file:%s][%s]]\n"
 		     (file-name-nondirectory fpath)
 		     (org-get-title fpath))))))
 
@@ -55,5 +55,7 @@
 		    (format "%s/*blog.html" (plist-get plist ':publishing-directory))))
       (with-temp-buffer
 	(insert-file-contents fpath)
-	(replace-regexp (regexp-quote "</article>") (concat "</article>\n\n" comment-section))
-	(write-file fpath)))))
+	(unless (string-match-p (regexp-quote "commentbox") (buffer-string))
+	  (replace-regexp (regexp-quote "</article>") (concat "</article>\n\n" comment-section))
+	  (write-file fpath))))))
+

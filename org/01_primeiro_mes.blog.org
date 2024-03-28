@@ -1,0 +1,94 @@
+#+HTML_HEAD: <link rel="stylesheet" href="./assets/css/tufte.css" type="text/css" />
+#+HTML_HEAD: <link rel="stylesheet" href="./assets/css/ox-tufte.css" type="text/css" />
+#+HTML_HEAD: <style>.figure-number { display: none; }</style>
+#+TITLE: Oportunidados M1
+
+* Meu primeiro mês *full time* na Oportunidados
+
+Desde o começo de março eu estou me dedicando integralmente à [[https://oportunidados.com.br][Oportunidados]].
+
+Completando o primeiro mês, me parece um momento decente - conquanto precipitado - para se fazer um balanço dos meus esforços iniciais e refletir se estou no rumo certo.
+
+Por razões que ficarão claras no decorrer desta redação, sinto-me meio idiota de gastar meu tempo escrevendo-a, mas o que segue são coisas que estão ocupando uma parte considerável da minha banda mental. Assentar as ideias em um texto pode ser o antídoto para continuar os trabalhos com a mente mais leve. call_marginnote("... ponto no qual tanto o [[https://paulgraham.com/essay.html][PG]] quanto o [[https://www.gutenberg.org/ebooks/3600][Montaigne]] concordariam comigo, ou não ...")
+
+** Onde eu mirei
+
+A ambição era subir a infra de cloud no GCP praticamente por completo. Isso incluiria:
+  - Migrar o app de produção, atualmente hospedado no Heroku
+  - Migrar nossa Postgres de produção para uma instância do Cloud SQL
+  - Migrar nossa ClickHouse de produção para um serviço dedicado do CH-Cloud no GCP
+  - Subir uma VM dedicada (juntamente com serviços auxiliares tipo Cloud Storage) para uso de nossas futuras bases de staging
+  - Iniciar o estabelecimento de nossas rotinas de ETL dentro de um paradigma mais parecido com o /modern data stack/
+... e nos permitiria desligar o Heroku de staging e produção, além de todos os serviços do Yandex, consolidando nossos gastos com infra-estrutura de computação em nuvem apenas no GCP (além de baratear os mesmos).
+
+Fora isso, a intenção era /fazer alguma coisa/ para ganhar alguma "casca" com o universo do GCP e aprender a navegar seus diversos componentes, pavimentando o caminho tanto para o estabelecimento do futuro /data stack/ quanto para solidificar nosso stack de CD/CI no Google, talvez até movendo os review apps do Heroku para o GCP usando o Cloud Deploy.
+
+Além de todos os pontos acima, eu tinha +o delírio+ a ambição de revisar o "curso" de data stack do [[https://www.kahandatasolutions.com/][Kahan]] e ir lendo o [[https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/][Designing Data Intensive Applications]] concomitantemente com minhas atividades. Tipo, aquela leitura matinal pra deixar o caboclo afiado para o dia em frente. call_marginnote("/sucrilhos for the mind, if you will/")
+
+Lendo isso agora realmente fica claro que meu nível de alucinação e ingenuidade era grande há quatro semanas. Nada como uma saudável ignorância para irmos em frente.
+
+#+ATTR_HTML: :style display:grid;place-items:center;
+#+begin_figure
+[[../assets/images/b01_motivacao.png]]
+#+end_figure
+
+** Aonde cheguei
+
+Bom, ao menos o objetivo de ganhar casca foi atingido...
+
+#+ATTR_HTML: :style display:grid;place-items:center;
+#+begin_figure
+#+ATTR_HTML: :style display:flex;margin:0 auto; :width 80%
+[[../assets/images/b01_dor_sofrimento.png]]
+#+end_figure
+
+Brincadeiras à parte, até que não foi de todo mal. Eu aprendi /muita coisa/ sobre GCP - embora a documentação seja em geral meio confusa e espalhada, tornando juntar as peças do grande quebra-cabeça um tanto desafiador. E também obtive alguns resultados tangíveis. Nosso app de produção está prontinho para rodar na nova infra [fn:1], assim como a base de lógica de negócios.
+
+Ficou faltando a migração do /ClickHouse/, a VM de staging e é claro o ETL, mas agora estou feliz que fui em frente com a estratégia de "fazer alguma coisa". Certamente o caminho ficou mais claro, se não mais fácil [fn:2], para encarar a tarefa que tanto quero atacar há mais de 6 meses - montar nosso /data stack/ 🤓.
+
+E como talvez era de se esperar, uma atividade como "migrar o app de produção" não é algo que se faz em dois palitos. No caminho, acabei aprendendo:
+  - montar uma zona de destino e hierarquia de recursos no GCP;
+  - como mexer no Cloud Build e integrá-lo com nosso sistema;
+  - uma porrada de coisas sobre nosso build containerizado;
+  - a usar o [[https://playwright.dev/][Playwright]] - montando uma suite de testes end-2-end que pode ser separada do app principal e servir para vários outros propósitos no futuro;
+  - como integrar o CloudSQL com outras funcionalidades severless ou integradas no VPC do GCP
+
+Fora isso, imprimi algum /momentum/ em atividades de desenvolvimento paralelas como nossa ferramenta de pontuação de localizações para franquias (bastante aprendizado aqui também), subi uma nova VM no yandex para responder à uma iminente parada de serviço na região que tínhamos nossa antiga (quebrando nossas /functions/ de marketing no caminho 😅), além de ajudar com uma ou outra coisa tipo criar modelos de propostas ou entender porque o Google Bot estava engasgando nossa base ao listar os sitemaps.
+
+** Isso é suficiente?
+
+Tendo como meta (arbitrária) ter uma empresa viável em 18 meses, é bom considerar se isso ainda é realístico. Afinal, se realmente o for, é para que cada novo mês traga substância para confirmar essa suspeita. Ainda é muito cedo para vaticinar, mas me ocorreu a seguinte forma - tosca, mas melhor que nada - de avaliar as coisas.
+
+Se eu multiplicar os resultados obtidos este mês por 18, seria o suficiente para construir o tech stack e evoluir nosso produto ao nível necessário para atingir o sucesso almejado?
+
+Como ainda é tudo muito incerto, não acho produtivo entrar no mérito detalhado do que é exatamente "ser viável", qual é a linha de corte de "sucesso", quais são as funcionalidades necessárias para o produto e os consequentes requisitos técnicos que nos levarão até lá (ninguém sabe ainda).
+
+Mas já dá pra ter uma ideia do que é multiplicar o atingido no parágrafo acima por 18. Embora não seja pouca coisa, parece-me insuficiente para atingir nossas ambições - eu estaria mais tranquilo se o fator fosse 30 ou 50. Choro, desespero, frustração? Não. Há razões para sermos otimistas e uma delas é a oitava maravilha do mundo: os juros compostos.
+
+Muitas das atividades técnicas, quando realizadas com alguma estratégia, são como instalar polias. Você se dá ao trabalho uma vez, mas dali pra frente, consegue mover cargas maiores com muito menos esforço - este é o caso do Cloud Build e do setup da infra estrutura, por exemplo. Agora podemos realizar testes A/B só dando deploy de duas versões e re-direcionando o tráfego. Em outras, você consegue criar as condições para "multiplicar o trabalho", como no caso dos testes e2e realizados separadamente da nossa base - e que agora podem ser completados por outras pessoas mais pra frente.
+
+#+begin_marginnote
+#+CAPTION: Cloud Build / Cloud Run - circa 1100AD.
+[[file:../assets/images/b01_polias.png]]
+#+end_marginnote
+
+Obviamente não se trata de uma ciência exata aqui, mas estaria disposto a entreter a idéia de que mês que vem conseguirei realizar ao menos 10% a mais do que neste março, e tomando sempre o cuidado de trabalhar em coisas que se compõe, manter essa taxa. Claro, haverá meses de reveses, haverá necessidade de embarcar em iniciativas que não se comporão por motivos de força maior. Mas se ao menos essa taxa for de 6% médios, [[https://en.wikipedia.org/wiki/Geometric_series#Sum][minhas contas]] dizem que o fator de 30 está ao meu alcance. Se eu ficar bom nisso, talvez até o de 50.
+
+** Aprendizados
+
+Nada que presta é fácil. É saudável aproximar-se do trabalho em frente com humildade e respeito, mas acima de tudo estratégia. Cada minuto gasto [fn:3] deve, se possível, ser dedicado a algo que se multiplicará ou alavancará nosso poder técnico, só assim poderemos responder à altura dos desafios que se impõem.
+
+Claro, nem tudo é crescimento exponencial nessa vida. É ainda importante para nós fazermos [[https://paulgraham.com/ds.html][coisas que não escalam]] e entender nosso market fit muito bem, evitando otimizações precoces, mas não dá pra se dar ao luxo de produzir apenas linearmente.
+
+Temos um novo data stack, um novo ambiente de CD/CI, integração de serviços auxiliares e muitas bases de dados para adicionar em nossa infra estrutura, além de muitos outros produtos para lançar. Eu ainda tenho confiança de que isto está em nosso alcance com uma equipe enxuta dentro de poucos meses.
+
+Mas vou precisar contar com os juros compostos para chegar lá. Veremos.
+
+Avante. 🚀
+
+[fn:1] com os testes e2e!
+[fn:2] nada é fácil
+[fn:3] exceto com essa redação
+
+# call_marginnote("Nota.")
+

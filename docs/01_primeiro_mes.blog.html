@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-03-28 Thu 10:29 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oportunidados M1</title>
+<meta name="author" content="Gustavo O Violato" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="./assets/css/tufte.css" type="text/css" />
+<link rel="stylesheet" href="./assets/css/ox-tufte.css" type="text/css" />
+<style>.figure-number { display: none; }</style>
+</head>
+<body>
+<header id="preamble" class="status">
+<a href="./index.html">Home</a><br><hr>
+</header>
+<article id="content" class="content">
+
+<section id="outline-container-orgc5d80e8" class="outline-2">
+<h2 id="orgc5d80e8">Meu primeiro mês <b>full time</b> na Oportunidados</h2>
+<div class="outline-text-2" id="text-orgc5d80e8">
+<p>
+Desde o começo de março eu estou me dedicando integralmente à <a href="https://oportunidados.com.br">Oportunidados</a>. Completando o primeiro mês, me parece um momento decente - conquanto precipitado - para se fazer um balanço dos meus esforços iniciais e refletir se estou no rumo certo.
+</p>
+
+<p>
+Por razões que ficarão claras no decorrer desta redação, sinto-me meio idiota de gastar meu tempo escrevendo-a, mas o que segue são coisas que estão ocupando uma parte considerável da minha banda mental. Assentar as ideias em um texto pode ser o antídoto para continuar os trabalhos com a mente mais leve. <label for='mn-auto.3856210' class='margin-toggle'>&#8853;</label><input type='checkbox' id='mn-auto.3856210' class='margin-toggle'><span class='marginnote'> &#x2026; ponto no qual tanto o <a href="https://paulgraham.com/essay.html">PG</a> quanto o <a href="https://www.gutenberg.org/ebooks/3600">Montaigne</a> concordariam comigo, ou não &#x2026; </span>
+</p>
+</div>
+
+<div id="outline-container-org97c1cee" class="outline-3">
+<h3 id="org97c1cee">Onde eu mirei</h3>
+<div class="outline-text-3" id="text-org97c1cee">
+<p>
+A ambição era subir a infra de cloud no GCP praticamente por completo. Isso incluiria:
+</p>
+<ul class="org-ul">
+<li>Migrar o app de produção, atualmente hospedado no Heroku</li>
+<li>Migrar nossa Postgres de produção para uma instância do Cloud SQL</li>
+<li>Migrar nossa ClickHouse de produção para um serviço dedicado do CH-Cloud no GCP</li>
+<li>Subir uma VM dedicada (juntamente com serviços auxiliares tipo Cloud Storage) para uso de nossas futuras bases de staging</li>
+<li>Iniciar o estabelecimento de nossas rotinas de ETL dentro de um paradigma mais parecido com o <i>modern data stack</i></li>
+</ul>
+<p>
+&#x2026; e nos permitiria desligar o Heroku de staging e produção, além de todos os serviços do Yandex, consolidando nossos gastos com infra-estrutura de computação em nuvem apenas no GCP (além de baratear os mesmos).
+</p>
+
+<p>
+Fora isso, a intenção era <i>fazer alguma coisa</i> para ganhar alguma "casca" com o universo do GCP e aprender a navegar seus diversos componentes, pavimentando o caminho tanto para o estabelecimento do futuro <i>data stack</i> quanto para solidificar nosso stack de CD/CI no Google, talvez até movendo os review apps do Heroku para o GCP usando o Cloud Deploy.
+</p>
+
+<p>
+Além de todos os pontos acima, eu tinha <del>o delírio</del> a ambição de revisar o "curso" de data stack do <a href="https://www.kahandatasolutions.com/">Kahan</a> e ir lendo o <a href="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/">Designing Data Intensive Applications</a> concomitantemente com minhas atividades. Tipo, aquela leitura matinal pra deixar o caboclo afiado para o dia em frente. <label for='mn-auto.7462220' class='margin-toggle'>&#8853;</label><input type='checkbox' id='mn-auto.7462220' class='margin-toggle'><span class='marginnote'> <i>sucrilhos for the mind, if you will</i> </span>
+</p>
+
+<p>
+Lendo isso agora realmente fica claro que meu nível de alucinação e ingenuidade era grande há quatro semanas. Nada como uma saudável ignorância para irmos em frente.
+</p>
+
+<figure style="display:grid;place-items:center;" id="orge7bdd67">
+
+<figure id="org8ed7056">
+<img src="../assets/images/b01_motivacao.png" alt="b01_motivacao.png">
+
+</figure>
+</figure>
+</div>
+</div>
+
+<div id="outline-container-org3be0272" class="outline-3">
+<h3 id="org3be0272">Aonde cheguei</h3>
+<div class="outline-text-3" id="text-org3be0272">
+<p>
+Bom, ao menos o objetivo de ganhar casca foi atingido&#x2026;
+</p>
+
+<figure style="display:grid;place-items:center;" id="org21c95e6">
+
+<figure id="org3c6068d">
+<img src="../assets/images/b01_dor_sofrimento.png" alt="b01_dor_sofrimento.png" style="display:flex;margin:0 auto;" width="80%">
+
+</figure>
+</figure>
+
+<p>
+Brincadeiras à parte, até que não foi de todo mal. Eu aprendi <i>muita coisa</i> sobre GCP - embora a documentação seja em geral meio confusa e espalhada, tornando juntar as peças do grande quebra-cabeça um tanto desafiador. E também obtive alguns resultados tangíveis. Nosso app de produção está prontinho para rodar na nova infra <label id='fnr.1' for='fnr-in.1.8058576' class='margin-toggle sidenote-number'><sup class='numeral'>1</sup></label><input type='checkbox' id='fnr-in.1.8058576' class='margin-toggle'><span class='sidenote'><sup class='numeral'>1</sup>
+com os testes e2e!
+</span>, assim como a base de lógica de negócios.
+</p>
+
+<p>
+Ficou faltando a migração do <i>ClickHouse</i>, a VM de staging e é claro o ETL, mas agora estou feliz que fui em frente com a estratégia de "fazer alguma coisa". Certamente o caminho ficou mais claro, se não mais fácil <label id='fnr.2' for='fnr-in.2.3197014' class='margin-toggle sidenote-number'><sup class='numeral'>2</sup></label><input type='checkbox' id='fnr-in.2.3197014' class='margin-toggle'><span class='sidenote'><sup class='numeral'>2</sup>
+nada é fácil
+</span>, para encarar a tarefa que tanto quero atacar há mais de 6 meses - montar nosso <i>data stack</i> 🤓.
+</p>
+
+<p>
+E como talvez era de se esperar, uma atividade como "migrar o app de produção" não é algo que se faz em dois palitos. No caminho, acabei aprendendo:
+</p>
+<ul class="org-ul">
+<li>montar uma zona de destino e hierarquia de recursos no GCP;</li>
+<li>como mexer no Cloud Build e integrá-lo com nosso sistema;</li>
+<li>uma porrada de coisas sobre nosso build containerizado;</li>
+<li>a usar o <a href="https://playwright.dev/">Playwright</a> - montando uma suite de testes end-2-end que pode ser separada do app principal e servir para vários outros propósitos no futuro;</li>
+<li>como integrar o CloudSQL com outras funcionalidades severless ou integradas no VPC do GCP</li>
+</ul>
+
+<p>
+Fora isso, imprimi algum <i>momentum</i> em atividades de desenvolvimento paralelas como nossa ferramenta de pontuação de localizações para franquias (bastante aprendizado aqui também), subi uma nova VM no yandex para responder à uma iminente parada de serviço na região que tínhamos nossa antiga (quebrando nossas <i>functions</i> de marketing no caminho 😅), além de ajudar com uma ou outra coisa tipo criar modelos de propostas ou entender porque o Google Bot estava engasgando nossa base ao listar os sitemaps.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga583789" class="outline-3">
+<h3 id="orga583789">Isso é suficiente?</h3>
+<div class="outline-text-3" id="text-orga583789">
+<p>
+Tendo como meta (arbitrária) ter uma empresa viável em 18 meses, é bom considerar se isso ainda é realístico. Afinal, se realmente o for, é para que cada novo mês traga substância para confirmar essa suspeita. Ainda é muito cedo para vaticinar, mas me ocorreu a seguinte forma - tosca, mas melhor que nada - de avaliar as coisas.
+</p>
+
+<p>
+Se eu multiplicar os resultados obtidos este mês por 18, seria o suficiente para construir o tech stack e evoluir nosso produto ao nível necessário para atingir o sucesso almejado?
+</p>
+
+<p>
+Como ainda é tudo muito incerto, não acho produtivo entrar no mérito detalhado do que é exatamente "ser viável", qual é a linha de corte de "sucesso", quais são as funcionalidades necessárias para o produto e os consequentes requisitos técnicos que nos levarão até lá (ninguém sabe ainda).
+</p>
+
+<p>
+Mas já dá pra ter uma ideia do que é multiplicar o atingido no parágrafo acima por 18. Embora não seja pouca coisa, parece-me insuficiente para atingir nossas ambições - eu estaria mais tranquilo se o fator fosse 30 ou 50. Choro, desespero, frustração? Não. Há razões para sermos otimistas e uma delas é a oitava maravilha do mundo: os juros compostos.
+</p>
+
+<p>
+Muitas das atividades técnicas, quando realizadas com alguma estratégia, são como instalar polias. Você se dá ao trabalho uma vez, mas dali pra frente, consegue mover cargas maiores com muito menos esforço - este é o caso do Cloud Build e do setup da infra estrutura, por exemplo. Agora podemos realizar testes A/B só dando deploy de duas versões e re-direcionando o tráfego. Em outras, você consegue criar as condições para "multiplicar o trabalho", como no caso dos testes e2e realizados separadamente da nossa base - e que agora podem ser completados por outras pessoas mais pra frente.
+</p>
+
+<label for='mn-auto.4652267' class='margin-toggle'>&#8853;</label><input type='checkbox' id='mn-auto.4652267' class='margin-toggle'><div class="marginnote" id="orgaadb52c">
+
+<figure id="orgf26e005">
+<img src="../assets/images/b01_polias.png" alt="b01_polias.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>Cloud Build / Cloud Run - circa 1100AD.</figcaption>
+</figure>
+
+</div>
+
+<p>
+Obviamente não se trata de uma ciência exata aqui, mas estaria disposto a entreter a idéia de que mês que vem conseguirei realizar ao menos 10% a mais do que neste março, e tomando sempre o cuidado de trabalhar em coisas que se compõe, manter essa taxa. Claro, haverá meses de reveses, haverá necessidade de embarcar em iniciativas que não se comporão por motivos de força maior. Mas se ao menos essa taxa for de 6% médios, <a href="https://en.wikipedia.org/wiki/Geometric_series#Sum">minhas contas</a> dizem que o fator de 30 está ao meu alcance. Se eu ficar bom nisso, talvez até o de 50.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1564d40" class="outline-3">
+<h3 id="org1564d40">Aprendizados</h3>
+<div class="outline-text-3" id="text-org1564d40">
+<p>
+Nada que presta é fácil. É saudável aproximar-se do trabalho em frente com humildade e respeito, mas acima de tudo estratégia. Cada minuto gasto <label id='fnr.3' for='fnr-in.3.7782359' class='margin-toggle sidenote-number'><sup class='numeral'>3</sup></label><input type='checkbox' id='fnr-in.3.7782359' class='margin-toggle'><span class='sidenote'><sup class='numeral'>3</sup>
+exceto com essa redação
+</span> deve, se possível, ser dedicado a algo que se multiplicará ou alavancará nosso poder técnico, só assim poderemos responder à altura dos desafios que se impõem.
+</p>
+
+<p>
+Claro, nem tudo é crescimento exponencial nessa vida. É ainda importante para nós fazermos <a href="https://paulgraham.com/ds.html">coisas que não escalam</a> e entender nosso market fit muito bem, evitando otimizações precoces, mas não dá pra se dar ao luxo de produzir apenas linearmente.
+</p>
+
+<p>
+Temos um novo data stack, um novo ambiente de CD/CI, integração de serviços auxiliares e muitas bases de dados para adicionar em nossa infra estrutura, além de muitos outros produtos para lançar. Eu ainda tenho confiança de que isto está em nosso alcance com uma equipe enxuta dentro de poucos meses.
+</p>
+
+<p>
+Mas vou precisar contar com os juros compostos para chegar lá. Veremos.
+</p>
+
+<p>
+Avante. 🚀
+</p>
+</div>
+</div>
+</section>
+</article>
+
+<div class="commentbox"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>commentBox('5734261814460416-proj')</script>
+
+
+</body>
+</html>

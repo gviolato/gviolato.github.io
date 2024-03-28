@@ -1,22 +1,25 @@
 #+HTML_HEAD: <link rel="stylesheet" href="./assets/css/tufte.css" type="text/css" />
 #+HTML_HEAD: <link rel="stylesheet" href="./assets/css/ox-tufte.css" type="text/css" />
 #+MACRO: blog-posts (eval (print-blog-posts $1))
-#+TITLE: Não alimente @@html:<br/>@@ os animais
-
-#+begin_figure
-[[file:./assets/images/animais.png]]
-#+end_figure
+#+MACRO: my_xp_years (eval (- (string-to-number (format-time-string "%Y" (current-time))) 2010))
+#+TITLE: Silogismos improdutivos.
 
 ** Blog
 
 {{{blog-posts(.)}}}
 
+#+begin_zeroth-section
+#+begin_marginnote
+[[file:../assets/images/books.png]]
+#+end_marginnote
+#+end_zeroth-section
+
 ** Sobre
 
-[[https://www.linkedin.com/in/gviolato/][Gustavo O. Violato]], [[http://www.bdita.bibl.ita.br/tgsdigitais/lista_resumo.php?num_tg=000554647][engenheiro aeronáutico]] com [[http://www.bdita.bibl.ita.br/tesesdigitais/lista_resumo.php?num_tese=64053][mestrado em controle não linear]] e 13 anos de [[https://www.camargo-schubert.com/][experiência]] na [[http://www.weg.net][indústria]] de [[https://www.vestas.com/en][energia eólica]]. Especificamente, liderando desenvolvimento de novas tecnologias na área de simulações aeroelásticas, cargas e controle, cálculos de confiabilidade estrutural e calibração de fatores de segurança e análise de dados com foco em tomadas de decisões baseadas em avaliação de risco.
+[[https://www.linkedin.com/in/gviolato/][Gustavo O. Violato]], [[http://www.bdita.bibl.ita.br/tgsdigitais/lista_resumo.php?num_tg=000554647][engenheiro aeronáutico]] com [[http://www.bdita.bibl.ita.br/tesesdigitais/lista_resumo.php?num_tese=64053][mestrado em controle não linear]] e {{{my_xp_years(.)}}} anos de [[https://www.camargo-schubert.com/][experiência]] na [[http://www.weg.net][indústria]] de [[https://www.vestas.com/en][energia eólica]]. Especificamente, liderando desenvolvimento de novas tecnologias na área de simulações aeroelásticas, cargas e controle, cálculos de confiabilidade estrutural e calibração de fatores de segurança e análise de dados com foco em tomadas de decisões baseadas em avaliação de risco.
 
 Co-fundador e diretor técnico da [[http://oportunidados.com.br][Oportunidados]], interessado em criar produtos de inteligência de dados e análise de risco simplificada para a maior parte do público empresarial brasileiro (os pequenos e médios empresários).
 
-Disponível para negociar serviços de consultoria independente nas minhas áreas de competência.
+Aberto à prestação de serviços de consultoria independente nas minhas áreas de competência.
 
 Interessado em engenharia, computação, [[https://a.co/d/j9EgGmL][finanças]], [[https://www.takimag.com/article/the_dawn_of_decadence/][história]] e [[https://www.takimag.com/article/when_man_invented_science/][ciência]].

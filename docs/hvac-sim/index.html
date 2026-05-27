@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HVAC &amp; Solar Simulator — Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f1117;
+      color: #e0e0e0;
+      padding: 24px;
+    }
+
+    h1 { font-size: 1.3rem; font-weight: 600; margin-bottom: 20px; color: #fff; }
+    h2 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: #ccc; }
+
+    .panel {
+      background: #1a1d27;
+      border: 1px solid #2a2d3a;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Summary table ───────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    thead th {
+      text-align: left;
+      padding: 8px 12px;
+      background: #23263a;
+      color: #aaa;
+      font-weight: 500;
+      border-bottom: 1px solid #2a2d3a;
+    }
+    tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #1e2030;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: #1e2236; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* ── Top row: heatmap + table side-by-side ───────────── */
+    .top-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 900px) {
+      .top-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cash-flow row: line chart + CAPEX bar ───────────── */
+    .cashflow-row {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+    .cashflow-main  { flex: 1 1 0; min-width: 0; overflow: hidden; }
+    .cashflow-capex {
+      flex: 0 0 180px;
+      width: 180px;
+      min-width: 0;
+      overflow: hidden;
+      display: none;
+    }
+    .cashflow-capex.visible { display: block; }
+
+    /* ── Plotly containers ───────────────────────────────── */
+    #chart-heatmap  { width: 100%; height: 420px; }
+    #chart-cashflow { width: 100%; height: 380px; }
+    #chart-capex    { width: 180px; height: 380px; }
+    #chart-energy   { width: 100%; height: 400px; }
+
+    /* ── Error banner ────────────────────────────────────── */
+    #error-banner {
+      display: none;
+      background: #3a1a1a;
+      border: 1px solid #7a2a2a;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 20px;
+      color: #f88;
+    }
+
+    /* ── Loading state ───────────────────────────────────── */
+    .loading {
+      color: #555;
+      font-style: italic;
+      padding: 20px 0;
+      pointer-events: none;
+    }
+    .chart-wrap { position: relative; }
+    .chart-wrap .loading {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+    .chart-wrap .loading.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<h1>HVAC &amp; Solar Simulator — Results Dashboard</h1>
+
+<div id="error-banner"></div>
+
+<div class="top-row">
+  <div class="panel">
+    <h2>NPV Matrix — click a cell to plot its cash flow</h2>
+    <div class="chart-wrap">
+      <p class="loading" id="loading-heatmap">Loading…</p>
+      <div id="chart-heatmap"></div>
+    </div>
+  </div>
+  <div class="panel">
+    <h2>Best Option per Scenario</h2>
+    <div id="table-container"><p class="loading">Loading…</p></div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>Monthly Cash Flow</h2>
+  <div class="cashflow-row">
+    <div class="cashflow-main chart-wrap">
+      <p class="loading" id="loading-cashflow">Loading…</p>
+      <div id="chart-cashflow"></div>
+    </div>
+    <div class="cashflow-capex" id="capex-col">
+      <h2 style="margin-bottom:8px;">Net CAPEX</h2>
+      <div id="chart-capex"></div>
+    </div>
+  </div>
+</div>
+
+<!-- energy balance panel -->
+<div class="panel" id="panel-energy">
+  <h2>Monthly Energy Balance</h2>
+  <div class="chart-wrap">
+    <div id="chart-energy"></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+// ── State ────────────────────────────────────────────────────────────────────
+const selected = new Set(); // keys: "combo_id|scenario_id"
+let simData = null;
+
+// MONTHS is set after simData loads, driven by n_months_horizon from the simulation
+let MONTHS = [];
+
+const COLORS = [
+  "#4f8ef7","#f7b24f","#4ff7a0","#f74f6a","#c44ff7",
+  "#4ff7f0","#f7e14f","#f7774f","#8af74f","#4f6af7",
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function fmtDKK(v) {
+  if (v == null) return "—";
+  return new Intl.NumberFormat("da-DK", {
+    style: "currency", currency: "DKK", maximumFractionDigits: 0,
+  }).format(v);
+}
+
+function showError(msg) {
+  const el = document.getElementById("error-banner");
+  el.textContent = msg;
+  el.style.display = "block";
+}
+
+// ── Summary table ─────────────────────────────────────────────────────────────
+function renderTable(data) {
+  const rows = data.summary_table.map(r => `
+    <tr>
+      <td>${r.scenario}</td>
+      <td>${r.choice}</td>
+      <td class="num">${fmtDKK(r.npv)}</td>
+      <td class="num">${fmtDKK(r.tco)}</td>
+      <td class="num">${r.payback != null ? r.payback + " yr" : "—"}</td>
+    </tr>`).join("");
+
+  document.getElementById("table-container").innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Scenario</th><th>Best Choice</th>
+          <th class="num">NPV</th><th class="num">TCO (10 yr)</th><th class="num">Payback</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+// ── Heatmap ───────────────────────────────────────────────────────────────────
+function renderHeatmap(data) {
+  const zRaw  = data.npv_matrix;
+  const zText = zRaw.map(row => row.map(v => v != null ? fmtDKK(v) : "—"));
+
+  const trace = {
+    type: "heatmap",
+    x: data.choices,
+    y: data.scenarios,
+    z: zRaw,
+    text: zText,
+    hovertemplate: "<b>%{y}</b><br>%{x}<br>NPV: %{text}<extra></extra>",
+    colorscale: [
+      [0,   "#c0392b"],
+      [0.4, "#922b21"],
+      [0.5, "#2c3e50"],
+      [0.6, "#1a5276"],
+      [1,   "#1abc9c"],
+    ],
+    zmid: 0,
+    showscale: true,
+    colorbar: { tickfont: { color: "#aaa" }, outlinewidth: 0 },
+  };
+
+  const layout = {
+    paper_bgcolor: "transparent",
+    plot_bgcolor:  "transparent",
+    margin: { l: 160, r: 20, t: 10, b: 120 },
+    xaxis: { tickangle: -35, tickfont: { color: "#aaa", size: 11 }, gridcolor: "#2a2d3a" },
+    yaxis: { tickfont: { color: "#aaa", size: 11 }, gridcolor: "#2a2d3a" },
+    font: { color: "#aaa" },
+  };
+
+  Plotly.newPlot("chart-heatmap", [trace], layout, {responsive: true, displayModeBar: false});
+
+  document.getElementById("chart-heatmap").on("plotly_click", evt => {
+    const pt    = evt.points[0];
+    const s_idx = data.scenarios.indexOf(pt.y);
+    const c_idx = data.choices.indexOf(pt.x);
+    if (s_idx < 0 || c_idx < 0) return;
+    const key = `${data.combo_ids[c_idx]}|${data.scenario_ids[s_idx]}`;
+    toggleSeries(key);
+    updateHeatmapHighlights(data);
+  });
+}
+
+function updateHeatmapHighlights(data) {
+  const shapes = [];
+  for (const key of selected) {
+    const [combo_id, scenario_id] = key.split("|");
+    const c_idx = data.combo_ids.indexOf(combo_id);
+    const s_idx = data.scenario_ids.indexOf(scenario_id);
+    if (c_idx < 0 || s_idx < 0) continue;
+    shapes.push({
+      type: "rect", xref: "x", yref: "y",
+      x0: c_idx - 0.5, x1: c_idx + 0.5,
+      y0: s_idx - 0.5, y1: s_idx + 0.5,
+      line: { color: "#fff", width: 2 },
+      fillcolor: "rgba(0,0,0,0)",
+    });
+  }
+  Plotly.relayout("chart-heatmap", { shapes });
+}
+
+// ── Cash-flow line chart ──────────────────────────────────────────────────────
+function toggleSeries(key) {
+  if (selected.has(key)) { selected.delete(key); } else { selected.add(key); }
+
+  const capexCol    = document.getElementById("capex-col");
+  const wasVisible  = capexCol.classList.contains("visible");
+  const willBeVisible = selected.size > 0;
+
+  capexCol.classList.toggle("visible", willBeVisible);
+
+  redrawCashflow();
+  redrawCapexChart();
+  redrawEnergyChart();
+
+  if (wasVisible !== willBeVisible) {
+    requestAnimationFrame(() => Plotly.Plots.resize(
+      document.getElementById("chart-cashflow")
+    ));
+  }
+}
+
+function redrawCashflow() {
+  const netCapex = simData.net_capex || {};
+  const traces   = [];
+  let colorIdx   = 0;
+
+  for (const key of selected) {
+    const cf_full = simData.cashflow_series[key];
+    if (!cf_full) continue;
+    const [combo_id, scenario_id] = key.split("|");
+    const c_idx = simData.combo_ids.indexOf(combo_id);
+    const s_idx = simData.scenario_ids.indexOf(scenario_id);
+    const choiceName   = c_idx >= 0 ? simData.choices[c_idx]   : combo_id;
+    const scenarioName = s_idx >= 0 ? simData.scenarios[s_idx] : scenario_id;
+    const color = COLORS[colorIdx % COLORS.length];
+    const capex = (simData.capex_in_cf0 || {})[key] || 0;
+    const n = MONTHS.length;
+
+    // Strip one-time items from month 0 and truncate to horizon
+    const cf_op = cf_full.slice(0, n);
+    cf_op[0] = cf_full[0] - capex;
+
+    traces.push({
+      name: `${choiceName} · ${scenarioName}`,
+      meta: key,          // used by plotly_legendclick to reverse-look up the key
+      x: MONTHS, y: cf_op,
+      type: "scatter", mode: "lines",
+      line: { color, width: 1.5 },
+    });
+    colorIdx++;
+  }
+
+  Plotly.react("chart-cashflow", traces, {
+    paper_bgcolor: "transparent",
+    plot_bgcolor:  "transparent",
+    margin: { l: 80, r: 20, t: 10, b: 90 },
+    xaxis: {
+      type: "date",
+      title: { text: "Month", font: { color: "#aaa" } },
+      tickfont: { color: "#aaa" },
+      gridcolor: "#2a2d3a",
+    },
+    yaxis: {
+      title: { text: "DKK / month", font: { color: "#aaa" } },
+      tickfont: { color: "#aaa" },
+      gridcolor: "#2a2d3a",
+    },
+    legend: {
+      orientation: "h",
+      x: 0, y: -0.18,
+      font: { color: "#ccc" },
+      bgcolor: "rgba(0,0,0,0)",
+    },
+    font:   { color: "#aaa" },
+    shapes: [{
+      type: "line", xref: "paper", yref: "y",
+      x0: 0, x1: 1, y0: 0, y1: 0,
+      line: { color: "#555", width: 1, dash: "dot" },
+    }],
+  }, {responsive: true, displayModeBar: false});
+}
+
+// ── CAPEX bar chart ───────────────────────────────────────────────────────────
+function redrawCapexChart() {
+  const grossCapex   = simData.gross_capex    || {};
+  const loanPrincipal = simData.loan_principal || {};
+
+  // Deduplicate by combo_id; use the first selected key for scenario context
+  const seen = new Map(); // combo_id → {label, gross, loan, color}
+  let colorIdx = 0;
+  for (const key of selected) {
+    const [combo_id] = key.split("|");
+    if (seen.has(combo_id)) continue;
+    const c_idx = simData.combo_ids.indexOf(combo_id);
+    const label = c_idx >= 0 ? simData.choices[c_idx] : combo_id;
+    seen.set(combo_id, {
+      label,
+      gross: grossCapex[combo_id] || 0,
+      loan:  loanPrincipal[key]   || 0,
+      color: COLORS[colorIdx % COLORS.length],
+    });
+    colorIdx++;
+  }
+
+  const entries = [...seen.values()].filter(e => e.gross > 0);
+  const hasLoan = entries.some(e => e.loan > 0);
+
+  const traces = [{
+    name: "Gross CAPEX",
+    type: "bar",
+    x: entries.map(e => e.label),
+    y: entries.map(e => e.gross),
+    marker: { color: entries.map(e => e.color), opacity: 0.75 },
+    hovertemplate: "<b>%{x}</b><br>Gross: %{y:,.0f} DKK<extra></extra>",
+  }];
+
+  if (hasLoan) {
+    traces.push({
+      name: "Loan (financed)",
+      type: "bar",
+      x: entries.map(e => e.label),
+      y: entries.map(e => -e.loan),
+      marker: { color: entries.map(e => e.color), opacity: 0.35, pattern: { shape: "/" } },
+      hovertemplate: "<b>%{x}</b><br>Financed: %{customdata:,.0f} DKK<extra></extra>",
+      customdata: entries.map(e => e.loan),
+    });
+  }
+
+  Plotly.react("chart-capex", traces, {
+    barmode: "relative",
+    paper_bgcolor: "transparent",
+    plot_bgcolor:  "transparent",
+    margin: { l: 60, r: 8, t: 10, b: 8 },
+    xaxis: {
+      showticklabels: false,
+      gridcolor: "#2a2d3a",
+    },
+    yaxis: {
+      title: { text: "DKK", font: { color: "#aaa", size: 11 } },
+      tickfont: { color: "#aaa", size: 10 },
+      gridcolor: "#2a2d3a",
+    },
+    font:       { color: "#aaa" },
+    showlegend: false,
+  }, {responsive: false, displayModeBar: false});
+}
+
+// ── Energy balance chart ──────────────────────────────────────────────────────
+function redrawEnergyChart() {
+  const energySeries = simData.energy_series || {};
+  const traces = [];
+  let colorIdx = 0;
+
+  for (const key of selected) {
+    const e = energySeries[key];
+    if (!e) { colorIdx++; continue; }
+    const [combo_id, scenario_id] = key.split("|");
+    const c_idx = simData.combo_ids.indexOf(combo_id);
+    const s_idx = simData.scenario_ids.indexOf(scenario_id);
+    const color = COLORS[colorIdx % COLORS.length];
+    const label = [
+      c_idx >= 0 ? simData.choices[c_idx]   : combo_id,
+      s_idx >= 0 ? simData.scenarios[s_idx] : scenario_id,
+    ].join(" · ");
+    colorIdx++;
+
+    const hasSolar   = e.solar_kwh.some(v => v > 0);
+    const hasBattery = e.battery_kwh.some(v => v > 0);
+
+    const n = MONTHS.length;
+    traces.push({
+      name: `${label} · Heat demand`,
+      x: MONTHS, y: e.thermal_kwh.slice(0, n),
+      type: "scatter", mode: "lines",
+      line: { color, width: 1.5, dash: "dash" },
+      legendgroup: key,
+    });
+
+    traces.push({
+      name: `${label} · Electricity`,
+      x: MONTHS, y: e.elec_consumed_kwh.slice(0, n),
+      type: "scatter", mode: "lines",
+      line: { color, width: 1.5 },
+      legendgroup: key,
+    });
+
+    if (hasSolar) {
+      traces.push({
+        name: `${label} · Solar`,
+        x: MONTHS, y: e.solar_kwh.slice(0, n),
+        type: "scatter", mode: "lines",
+        line: { color, width: 1.5, dash: "dot" },
+        opacity: 0.7,
+        legendgroup: key,
+      });
+    }
+
+    if (hasBattery) {
+      traces.push({
+        name: `${label} · Battery`,
+        x: MONTHS, y: e.battery_kwh.slice(0, n),
+        type: "bar",
+        marker: { color, opacity: 0.4 },
+        legendgroup: key,
+      });
+    }
+  }
+
+  Plotly.react("chart-energy", traces, {
+    paper_bgcolor: "transparent",
+    plot_bgcolor:  "transparent",
+    margin: { l: 70, r: 20, t: 10, b: 90 },
+    barmode: "overlay",
+    xaxis: {
+      type: "date",
+      title: { text: "Month", font: { color: "#aaa" } },
+      tickfont: { color: "#aaa" },
+      gridcolor: "#2a2d3a",
+    },
+    yaxis: {
+      title: { text: "kWh / month", font: { color: "#aaa" } },
+      tickfont: { color: "#aaa" },
+      gridcolor: "#2a2d3a",
+    },
+    legend: {
+      orientation: "h",
+      x: 0, y: -0.18,
+      font: { color: "#ccc" },
+      bgcolor: "rgba(0,0,0,0)",
+    },
+    font: { color: "#aaa" },
+  }, {responsive: true, displayModeBar: false});
+}
+
+// ── Bootstrap ─────────────────────────────────────────────────────────────────
+async function init() {
+  try {
+    const resp = await fetch("/api/data");
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({ error: resp.statusText }));
+      showError(`Could not load simulation data: ${err.error}`);
+      return;
+    }
+    simData = await resp.json();
+    const n = simData.n_months_horizon || 240;
+    MONTHS = Array.from({length: n}, (_, i) => {
+      const d = new Date(2026, 4 + i, 1);
+      return d.toISOString().slice(0, 7);
+    });
+  } catch (e) {
+    showError(`Could not reach server: ${e.message}`);
+    return;
+  }
+
+  renderTable(simData);
+  renderHeatmap(simData);
+  document.getElementById("loading-heatmap").classList.add("hidden");
+  redrawCashflow();
+  document.getElementById("loading-cashflow").classList.add("hidden");
+  redrawEnergyChart();
+
+  // Couple legend clicks to the full toggle (removes series + updates CAPEX bar + heatmap)
+  document.getElementById("chart-cashflow").on("plotly_legendclick", evt => {
+    const key = evt.data[evt.curveNumber]?.meta;
+    if (key) {
+      toggleSeries(key);
+      updateHeatmapHighlights(simData);
+    }
+    return false;
+  });
+}
+
+init();
+</script>
+</body>
+</html>

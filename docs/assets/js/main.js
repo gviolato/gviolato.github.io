@@ -81,7 +81,7 @@
       } catch (err) {
         msgEl.classList.add('error');
         msgEl.textContent =
-          'Something went wrong. Please try again or email me directly at violato@oportunidados.com.br.';
+          'Something went wrong. Please try again later.';
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Message';

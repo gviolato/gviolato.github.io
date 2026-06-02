@@ -18,7 +18,6 @@ PROFILE = {
         "15 years at the intersection of wind turbine engineering and engineering computation. "
         "6 granted patents. Contributor to IEC TS 61400-9. CTO of Oportunidados."
     ),
-    "email": "violato@oportunidados.com.br",
     "linkedin": "https://www.linkedin.com/in/gviolato/",
     "location": "Remote",
     "photo": "assets/images/gustavo.jpg",

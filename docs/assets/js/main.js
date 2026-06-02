@@ -60,23 +60,19 @@
       const data = Object.fromEntries(new FormData(form).entries());
 
       try {
-        const res = await fetch(WEBHOOK_URL, {
+        // text/plain avoids a CORS preflight; Apps Script receives the JSON via e.postData.contents
+        await fetch(WEBHOOK_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify(data),
+          mode: 'no-cors',
         });
 
-        const json = await res.json();
-
-        if (json.result === 'ok') {
-          msgEl.classList.add('success');
-          msgEl.textContent = 'Thank you — your message has been sent. I will be in touch shortly.';
-          form.reset();
-          if (typeof turnstile !== 'undefined') {
-            turnstile.reset();
-          }
-        } else {
-          throw new Error(json.error || 'Submission failed');
+        msgEl.classList.add('success');
+        msgEl.textContent = 'Thank you — your message has been sent. I will be in touch shortly.';
+        form.reset();
+        if (typeof turnstile !== 'undefined') {
+          turnstile.reset();
         }
       } catch (err) {
         msgEl.classList.add('error');

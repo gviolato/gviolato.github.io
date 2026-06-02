@@ -141,7 +141,7 @@ EXPERIENCE = [
         "company": "WEG Equipamentos Elétricos S.A.",
         "location": "Jaraguá do Sul, Brazil",
         "desc": (
-            "Founding loads and controls engineer at a Brazilian wind turbine OEM. Built the team's "
+            "First full-time loads and controls engineer at a Brazilian wind turbine OEM. Built the team's "
             "methodology and toolchain. Achieved 50% reduction in simulation processing time; 10× speedup "
             "via horizontal computing cluster. Supported multi-megawatt platform type certification."
         ),

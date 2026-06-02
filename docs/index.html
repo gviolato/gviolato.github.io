@@ -1,259 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-03-28 Thu 09:02 -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Silogismos improdutivos.</title>
-<meta name="author" content="Gustavo O Violato" />
-<meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
-<link rel="stylesheet" href="./assets/css/tufte.css" type="text/css" />
-<link rel="stylesheet" href="./assets/css/ox-tufte.css" type="text/css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gustavo Violato — Wind Turbine Engineering &amp; Data Systems</title>
+  <meta name="description" content="Senior wind turbine engineer and CTO with 15 years at the intersection of aeroelastic simulation, probabilistic design, and data engineering. 6 granted patents. Contributor to IEC TS 61400-9:2025." />
+  <meta property="og:title" content="Gustavo Violato — Wind Turbine Engineering &amp; Data Systems" />
+  <meta property="og:description" content="Senior wind turbine engineer and CTO with 15 years at the intersection of aeroelastic simulation, probabilistic design, and data engineering. 6 granted patents. Contributor to IEC TS 61400-9:2025." />
+  <meta property="og:url" content="https://gviolato.com" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://gviolato.com" />
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Cloudflare Turnstile — replace YOUR_TURNSTILE_SITE_KEY with your key from dash.cloudflare.com/turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
-<header id="preamble" class="status">
-<a href="./index.html">Home</a><br><hr>
+
+<!-- =========================================================================
+     Navigation
+     ========================================================================= -->
+<header class="site-nav" role="banner">
+  <nav class="nav-inner" aria-label="Main navigation">
+    <a href="#" class="nav-brand">Gustavo Violato</a>
+
+    <button
+      id="nav-toggle"
+      class="nav-toggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+      aria-controls="nav-links"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul id="nav-links" class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#demos">Demos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 </header>
-<article id="content" class="content">
-<header>
-<h1 class="title">Silogismos improdutivos.</h1>
-</header>
-<section id="outline-container-orgd432bda" class="outline-2">
-<h2 id="orgd432bda">Blog</h2>
-<div class="outline-text-2" id="text-orgd432bda">
-<ul class="org-ul">
-<li><a href="00_blergh.blog.html">Editorial</a></li>
-<li><a href="01_primeiro_mes.blog.html">Oportunidados M1</a></li>
-</ul>
 
+<main>
 
-<div class="zeroth-section" id="orgd26f55e">
-<label for='mn-auto.541982' class='margin-toggle'>&#8853;</label><input type='checkbox' id='mn-auto.541982' class='margin-toggle'><div class="marginnote" id="org956e7e8">
+<!-- =========================================================================
+     Hero
+     ========================================================================= -->
+<section class="hero" aria-labelledby="hero-name">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="section-label">Wind Energy · Data Engineering · Probabilistic Design</p>
+        <h1 id="hero-name">Gustavo Violato</h1>
+        <p class="hero-subtitle">Wind Turbine Engineering &amp; Data Systems</p>
+        <p class="hero-tagline">15 years at the intersection of wind turbine engineering and engineering computation. 6 granted patents. Contributor to IEC TS 61400-9. CTO of Oportunidados.</p>
+        <div class="hero-actions">
+          <a href="#experience" class="btn btn-primary">View Experience</a>
+          <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+        </div>
+      </div>
 
-<figure id="orgea28628">
-<img src="../assets/images/books.png" alt="books.png">
-
-</figure>
-
-</div>
-
-</div>
-</div>
+      <div class="hero-photo" aria-hidden="true">
+        
+        <div class="photo-circle" id="photo-circle">
+          <img
+            id="profile-img"
+            src="assets/images/gustavo.jpg"
+            alt="Gustavo Violato"
+            width="160"
+            height="160"
+          />
+        </div>
+        
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="outline-container-hvac" class="outline-2">
-<h2 id="hvac-sim">Simulações</h2>
-<div class="outline-text-2" id="text-hvac-sim">
-<ul class="org-ul">
-<li><a href="hvac-sim/index.html">HVAC &amp; Solar — Simulador Financeiro (DK)</a></li>
-</ul>
-</div>
+<!-- =========================================================================
+     About
+     ========================================================================= -->
+<section id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <span class="section-label">Background</span>
+    <h2 class="section-title" id="about-heading">About</h2>
+
+    <div class="about-body">
+      
+      <p>My work sits at a specific and rarely combined intersection: deep expertise in wind turbine aeroelastic simulation, structural reliability, and probabilistic design — built over 15 years at companies including Vestas Wind Systems — and the software and data engineering practice to implement these methods at scale. I hold 6 granted patents and served as Secretary of the IEC TC88 project team that produced IEC TS 61400-9:2025, the wind industry&#39;s first international standard for probabilistic design of wind turbines.</p>
+      
+      <p>More recently, I stepped away from that track to co-found and lead the technical organisation of Oportunidados, a business intelligence startup in Brazil. As CTO, I built production-grade data engineering pipelines, a full-stack web platform, and a technical team from the ground up — navigating the AI inflection point of 2024–2025 with a commercial product serving enterprise clients. That experience gave me a practitioner&#39;s understanding of what it takes to build and operate data-intensive software systems, not just design them.</p>
+      
+      <p>I am now available for consulting engagements and senior technical roles at the boundary of wind energy engineering and data infrastructure. If you are working on problems that require both physics-based simulation expertise and modern software and data engineering practice, I would be glad to discuss how I can help.</p>
+      
+    </div>
+
+    <div class="about-meta">
+      <div class="about-meta-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Remote</span>
+      </div>
+      <div class="about-meta-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://www.linkedin.com/in/gviolato/" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="outline-container-org9c7ca08" class="outline-2">
-<h2 id="org9c7ca08">Sobre</h2>
-<div class="outline-text-2" id="text-org9c7ca08">
-<p>
-<a href="https://www.linkedin.com/in/gviolato/">Gustavo O. Violato</a>, <a href="http://www.bdita.bibl.ita.br/tgsdigitais/lista_resumo.php?num_tg=000554647">engenheiro aeronáutico</a> com <a href="http://www.bdita.bibl.ita.br/tesesdigitais/lista_resumo.php?num_tese=64053">mestrado em controle não linear</a> e 14 anos de <a href="https://www.camargo-schubert.com/">experiência</a> na <a href="http://www.weg.net">indústria</a> de <a href="https://www.vestas.com/en">energia eólica</a>. Especificamente, liderando desenvolvimento de novas tecnologias na área de simulações aeroelásticas, cargas e controle, cálculos de confiabilidade estrutural e calibração de fatores de segurança e análise de dados com foco em tomadas de decisões baseadas em avaliação de risco.
-</p>
+<!-- =========================================================================
+     Services
+     ========================================================================= -->
+<section id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <span class="section-label">Consulting</span>
+    <h2 class="section-title" id="services-heading">Services</h2>
+    <p class="section-intro">Areas of specialisation available for consulting engagements and senior technical roles.</p>
 
-<p>
-Co-fundador e diretor técnico da <a href="http://oportunidados.com.br">Oportunidados</a>, interessado em criar produtos de inteligência de dados e análise de risco simplificada para a maior parte do público empresarial brasileiro (os pequenos e médios empresários).
-</p>
-
-<p>
-Aberto à prestação de serviços de consultoria independente nas minhas áreas de competência.
-</p>
-
-<p>
-Interessado em engenharia, computação, <a href="https://a.co/d/j9EgGmL">finanças</a>, <a href="https://www.takimag.com/article/the_dawn_of_decadence/">história</a> e <a href="https://www.takimag.com/article/when_man_invented_science/">ciência</a>.
-</p>
-</div>
+    <div class="services-grid">
+      
+      <article class="service-card">
+        <h3>Aeroelastic Simulation &amp; Load Analysis</h3>
+        <p class="service-desc">Design load calculations, load verification campaigns, and turbine certification support using industry-standard simulation tools.</p>
+        <ul class="service-bullets" role="list">
+          
+          <li>Flex5/VTS, HAWC2, HAWC2Stab, FAST/OpenFAST, Bladed</li>
+          
+          <li>Load verification for technology feasibility and type certification</li>
+          
+          <li>Stability analysis and controller validation</li>
+          
+        </ul>
+      </article>
+      
+      <article class="service-card">
+        <h3>Probabilistic Design &amp; Reliability</h3>
+        <p class="service-desc">Application and calibration of probabilistic structural design methods for wind turbines, including safety factor derivation and risk-based assessment.</p>
+        <ul class="service-bullets" role="list">
+          
+          <li>IEC 61400-1 and IEC TS 61400-9 compliance and interpretation</li>
+          
+          <li>Structural reliability analysis (FORM/SORM)</li>
+          
+          <li>Safety factor calibration for fatigue and extreme loads</li>
+          
+        </ul>
+      </article>
+      
+      <article class="service-card">
+        <h3>Model Validation &amp; Certification</h3>
+        <p class="service-desc">Aeroelastic model validation against field measurements, design of validation frameworks, and certification strategy.</p>
+        <ul class="service-bullets" role="list">
+          
+          <li>IECRE/TC88 model validation framework</li>
+          
+          <li>Aeroelastic model uncertainty quantification</li>
+          
+          <li>Field data analysis and model–measurement correlation</li>
+          
+        </ul>
+      </article>
+      
+      <article class="service-card">
+        <h3>Engineering Data Systems</h3>
+        <p class="service-desc">Data engineering and software tooling for simulation workflows, field data processing, and engineering insight at scale.</p>
+        <ul class="service-bullets" role="list">
+          
+          <li>Simulation pipeline automation</li>
+          
+          <li>Cloud data infrastructure and ETL pipelines</li>
+          
+          <li>Post-processing tooling for large simulation datasets</li>
+          
+        </ul>
+      </article>
+      
+    </div>
+  </div>
 </section>
-</article>
+
+<!-- =========================================================================
+     Experience
+     ========================================================================= -->
+<section id="experience" aria-labelledby="experience-heading">
+  <div class="container">
+    <span class="section-label">Career</span>
+    <h2 class="section-title" id="experience-heading">Experience</h2>
+    <p class="section-intro">15 years across wind energy engineering, R&amp;D, standards, and technology leadership.</p>
+
+    <ul class="timeline" role="list">
+      
+      <li class="timeline-item">
+        <p class="timeline-period">Mar 2024 – Present</p>
+        <p class="timeline-role">Technical Director / CTO</p>
+        <p class="timeline-company">
+          Oportunidados<span class="sep">·</span>Curitiba, Brazil · Remote
+        </p>
+        <p class="timeline-desc">Built and led the technical organisation of a business intelligence startup from inception — data engineering pipelines (DBT, Airflow), full-stack platform (Ruby on Rails + Vue), cloud infrastructure (GCP), and technical team hiring and management. Navigated integration of LLM-based features into production during the AI inflection point of 2024–2025.</p>
+      </li>
+      
+      <li class="timeline-item">
+        <p class="timeline-period">Oct 2021 – Feb 2024</p>
+        <p class="timeline-role">Specialist — Value Stream Lead, Design Basis &amp; Modelling</p>
+        <p class="timeline-company">
+          Vestas Wind Systems A/S<span class="sep">·</span>Aarhus, Denmark
+        </p>
+        <p class="timeline-desc">Led the team responsible for design basis, probabilistic design, and wind turbine dynamic modelling. Secretary of IEC PT 61400-9. Contributor to IECRE/TC88 Joint Working Forum on Model Validation. 4 patents filed during this period.</p>
+      </li>
+      
+      <li class="timeline-item">
+        <p class="timeline-period">Sep 2017 – Jan 2021</p>
+        <p class="timeline-role">Lead Engineer — Loads &amp; Controls Technologies</p>
+        <p class="timeline-company">
+          Vestas Wind Systems A/S<span class="sep">·</span>Aarhus, Denmark
+        </p>
+        <p class="timeline-desc">Technical lead for probabilistic and reliability-based load calculations. Developed new tooling for reliability-based design. Led root cause analysis of aeroelastic modelling inaccuracies. Delivered load verification campaigns for type certification.</p>
+      </li>
+      
+      <li class="timeline-item">
+        <p class="timeline-period">Aug 2014 – Aug 2017</p>
+        <p class="timeline-role">Senior Analyst — Loads &amp; Controls</p>
+        <p class="timeline-company">
+          WEG Equipamentos Elétricos S.A.<span class="sep">·</span>Jaraguá do Sul, Brazil
+        </p>
+        <p class="timeline-desc">Founding loads and controls engineer at a Brazilian wind turbine OEM. Built the team&#39;s methodology and toolchain. Achieved 50% reduction in simulation processing time; 10× speedup via horizontal computing cluster. Supported multi-megawatt platform type certification.</p>
+      </li>
+      
+      <li class="timeline-item">
+        <p class="timeline-period">Nov 2010 – Jun 2014</p>
+        <p class="timeline-role">Wind Engineer — Resource Assessment</p>
+        <p class="timeline-company">
+          Camargo Schubert Engenharia Eólica<span class="sep">·</span>Curitiba, Brazil
+        </p>
+        <p class="timeline-desc">Wind resource assessment, meso/micro-scale flow modelling, blade aerodynamic design (BEM). Co-authored the Atlas Eólico da Bahia (2013), mapping 195 GW of wind potential. Automated reporting workflows — 60% reduction in production time.</p>
+      </li>
+      
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================================
+     Research
+     ========================================================================= -->
+<section id="research" aria-labelledby="research-heading">
+  <div class="container">
+    <span class="section-label">Intellectual Property &amp; Publications</span>
+    <h2 class="section-title" id="research-heading">Research</h2>
+
+    <!-- Patents -->
+    <div class="research-subsection">
+      <h3>Patents</h3>
+      <ol class="patent-list" role="list">
+        
+        <li class="patent-item">
+          <span class="patent-title">
+            
+            <a href="https://patents.google.com/patent/EP4180653C0/en" target="_blank" rel="noopener noreferrer">Design of a Wind Turbine Rotor Blade</a>
+            
+          </span>
+          <span class="patent-numbers">EP4180653 · US11821402</span>
+          <span class="patent-desc">Reliability-based differentiation of gravity and wind fatigue safety factors to reduce blade material requirements.</span>
+        </li>
+        
+        <li class="patent-item">
+          <span class="patent-title">
+            
+            <a href="https://patents.google.com/patent/EP3987176A1/en" target="_blank" rel="noopener noreferrer">Turbine Alignment by Use of Light Polarising Compass</a>
+            
+          </span>
+          <span class="patent-numbers">EP3987176 · WO2020253925</span>
+          <span class="patent-desc">Compass-free turbine orientation estimation via sky polarisation. Sole inventor.</span>
+        </li>
+        
+        <li class="patent-item">
+          <span class="patent-title">
+            
+            <a href="https://patents.google.com/patent/EP4146936C0/en" target="_blank" rel="noopener noreferrer">Blade Monitoring Through Active Promotion of Blade Vibrations</a>
+            
+          </span>
+          <span class="patent-numbers">EP4146936 · US12331722</span>
+          <span class="patent-desc">Non-intrusive structural health monitoring by actively exciting blade natural frequencies.</span>
+        </li>
+        
+        <li class="patent-item">
+          <span class="patent-title">
+            
+            <a href="https://patents.google.com/patent/US20240068443A1/en" target="_blank" rel="noopener noreferrer">Reduction of Edgewise Vibrations Using Blade Load Signal</a>
+            
+          </span>
+          <span class="patent-numbers">EP4274960 · US12173694</span>
+          <span class="patent-desc">Active pitch-based damping of edgewise blade vibrations using measured load signals.</span>
+        </li>
+        
+        <li class="patent-item">
+          <span class="patent-title">
+            
+            <a href="https://patents.google.com/patent/ES3062808T3/en" target="_blank" rel="noopener noreferrer">Individual Pitch Control with Unavailable Blade Load Sensor</a>
+            
+          </span>
+          <span class="patent-numbers">EP4341553 · WO2022242816</span>
+          <span class="patent-desc">Fault-tolerant individual pitch control — maintains load reduction when one blade sensor fails.</span>
+        </li>
+        
+        <li class="patent-item">
+          <span class="patent-title">
+            
+            <a href="https://patents.google.com/patent/EP4538922A1/en" target="_blank" rel="noopener noreferrer">Determination of Uncertainty of an Aeroelastic Model</a>
+            
+          </span>
+          <span class="patent-numbers">EP4538922</span>
+          <span class="patent-desc">Model-form uncertainty quantification enabling certification without prototype testing.</span>
+        </li>
+        
+      </ol>
+    </div>
+
+    <!-- Publications & Standards -->
+    <div class="research-subsection">
+      <h3>Publications &amp; Standards</h3>
+      <ol class="pub-list" role="list">
+        
+        <li class="pub-item">
+          <span class="pub-year">2025</span>
+          <div class="pub-body">
+            <p class="pub-text">
+              
+              IEC TS 61400-9:2025 — Probabilistic Design Measures for Wind Turbines. IEC TC88.
+              
+            </p>
+            
+            <p class="pub-role">Secretary, Project Team PT 61400-9</p>
+            
+          </div>
+        </li>
+        
+        <li class="pub-item">
+          <span class="pub-year">2021–2024</span>
+          <div class="pub-body">
+            <p class="pub-text">
+              
+              <a href="https://etech.iec.ch/issue/2024-03/pioneering-model-validation-for-wind-turbines" target="_blank" rel="noopener noreferrer">IECRE/TC88 Joint Working Forum on Model Validation.</a>
+              
+            </p>
+            
+            <p class="pub-role">Contributor, alignment documents for the forthcoming IEC standard on aeroelastic model validation</p>
+            
+          </div>
+        </li>
+        
+        <li class="pub-item">
+          <span class="pub-year">2023</span>
+          <div class="pub-body">
+            <p class="pub-text">
+              
+              <a href="https://doi.org/10.3390/en16041885" target="_blank" rel="noopener noreferrer">J. Sønderkær Nielsen, H. S. Toft, G. O. Violato. &#34;Risk-Based Assessment of the Reliability Level for Extreme Limit States in IEC 61400-1.&#34; Energies 16(4):1885.</a>
+              
+            </p>
+            
+          </div>
+        </li>
+        
+        <li class="pub-item">
+          <span class="pub-year">2013</span>
+          <div class="pub-body">
+            <p class="pub-text">
+              
+              Atlas Eólico da Bahia. Camargo Schubert / SECTI / SENAI CIMATEC.
+              
+            </p>
+            
+            <p class="pub-role">Co-author. Wind potential mapping for the state of Bahia, Brazil (195 GW identified at 150 m).</p>
+            
+          </div>
+        </li>
+        
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     Demos
+     ========================================================================= -->
+<section id="demos" aria-labelledby="demos-heading">
+  <div class="container">
+    <span class="section-label">Interactive Tools</span>
+    <h2 class="section-title" id="demos-heading">Demos</h2>
+    <p class="section-intro">Small browser-based tools built for specific engineering problems.</p>
+
+    <p class="demos-coming-soon">Coming soon.</p>
+  </div>
+</section>
+
+<!-- =========================================================================
+     Contact
+     ========================================================================= -->
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title" id="contact-heading">Contact</h2>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>
+          I am available for consulting engagements and senior technical roles.
+          If you have a problem at the boundary of wind energy engineering and
+          data infrastructure, I would be glad to discuss it.
+        </p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/gviolato/" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <form id="contact-form" class="contact-form" novalidate>
+        <input type="hidden" name="_origin" value="https://gviolato.com" />
+        <input type="hidden" name="_hp" value="" style="display:none" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contact-name">Name <span aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              autocomplete="name"
+              required
+              placeholder="Your name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              autocomplete="email"
+              required
+              placeholder="your@email.com"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-org">Organisation</label>
+          <input
+            type="text"
+            id="contact-org"
+            name="organisation"
+            autocomplete="organization"
+            placeholder="Company or institution (optional)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="contact-message">Message <span aria-hidden="true">*</span></label>
+          <textarea
+            id="contact-message"
+            name="message"
+            required
+            placeholder="Describe your project or enquiry…"
+          ></textarea>
+        </div>
+
+        <!-- Cloudflare Turnstile -->
+        <!-- REPLACE: YOUR_TURNSTILE_SITE_KEY — get it at https://dash.cloudflare.com/turnstile -->
+        <div class="turnstile-wrapper">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAADco95YLiHSc_hqO" data-theme="light"></div>
+        </div>
+
+        <div class="form-submit">
+          <div id="form-message" class="form-message" role="alert" aria-live="polite"></div>
+          <button type="submit" id="form-submit" class="btn btn-primary btn-submit">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =========================================================================
+     Footer
+     ========================================================================= -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <p class="footer-copy">&copy; 2025 Gustavo Violato. All rights reserved.</p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="https://www.linkedin.com/in/gviolato/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>

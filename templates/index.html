@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}" />
+  <meta property="og:title" content="{{ site.title }}" />
+  <meta property="og:description" content="{{ site.description }}" />
+  <meta property="og:url" content="{{ site.url }}" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="{{ site.url }}" />
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Cloudflare Turnstile — replace YOUR_TURNSTILE_SITE_KEY with your key from dash.cloudflare.com/turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+
+<!-- =========================================================================
+     Navigation
+     ========================================================================= -->
+<header class="site-nav" role="banner">
+  <nav class="nav-inner" aria-label="Main navigation">
+    <a href="#" class="nav-brand">Gustavo Violato</a>
+
+    <button
+      id="nav-toggle"
+      class="nav-toggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+      aria-controls="nav-links"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul id="nav-links" class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#demos">Demos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- =========================================================================
+     Hero
+     ========================================================================= -->
+<section class="hero" aria-labelledby="hero-name">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="section-label">Wind Energy · Data Engineering · Probabilistic Design</p>
+        <h1 id="hero-name">{{ profile.name }}</h1>
+        <p class="hero-subtitle">{{ profile.subtitle }}</p>
+        <p class="hero-tagline">{{ profile.tagline }}</p>
+        <div class="hero-actions">
+          <a href="#experience" class="btn btn-primary">View Experience</a>
+          <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="hero-photo" aria-hidden="true">
+        {% if photo_exists %}
+        <div class="photo-circle" id="photo-circle">
+          <img
+            id="profile-img"
+            src="{{ profile.photo }}"
+            alt="{{ profile.name }}"
+            width="160"
+            height="160"
+          />
+        </div>
+        {% else %}
+        <div class="photo-initials">
+          <span>{{ profile.photo_initials }}</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     About
+     ========================================================================= -->
+<section id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <span class="section-label">Background</span>
+    <h2 class="section-title" id="about-heading">About</h2>
+
+    <div class="about-body">
+      {% for para in about %}
+      <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+
+    <div class="about-meta">
+      <div class="about-meta-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>{{ profile.location }}</span>
+      </div>
+      <div class="about-meta-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     Services
+     ========================================================================= -->
+<section id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <span class="section-label">Consulting</span>
+    <h2 class="section-title" id="services-heading">Services</h2>
+    <p class="section-intro">Areas of specialisation available for consulting engagements and senior technical roles.</p>
+
+    <div class="services-grid">
+      {% for svc in services %}
+      <article class="service-card">
+        <h3>{{ svc.title }}</h3>
+        <p class="service-desc">{{ svc.desc }}</p>
+        <ul class="service-bullets" role="list">
+          {% for b in svc.bullets %}
+          <li>{{ b }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     Experience
+     ========================================================================= -->
+<section id="experience" aria-labelledby="experience-heading">
+  <div class="container">
+    <span class="section-label">Career</span>
+    <h2 class="section-title" id="experience-heading">Experience</h2>
+    <p class="section-intro">15 years across wind energy engineering, R&amp;D, standards, and technology leadership.</p>
+
+    <ul class="timeline" role="list">
+      {% for job in experience %}
+      <li class="timeline-item">
+        <p class="timeline-period">{{ job.period }}</p>
+        <p class="timeline-role">{{ job.role }}</p>
+        <p class="timeline-company">
+          {{ job.company }}<span class="sep">·</span>{{ job.location }}
+        </p>
+        <p class="timeline-desc">{{ job.desc }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================================
+     Research
+     ========================================================================= -->
+<section id="research" aria-labelledby="research-heading">
+  <div class="container">
+    <span class="section-label">Intellectual Property &amp; Publications</span>
+    <h2 class="section-title" id="research-heading">Research</h2>
+
+    <!-- Patents -->
+    <div class="research-subsection">
+      <h3>Patents</h3>
+      <ol class="patent-list" role="list">
+        {% for p in patents %}
+        <li class="patent-item">
+          <span class="patent-title">
+            {% if p.url %}
+            <a href="{{ p.url }}" target="_blank" rel="noopener noreferrer">{{ p.title }}</a>
+            {% else %}
+            {{ p.title }}
+            {% endif %}
+          </span>
+          <span class="patent-numbers">{{ p.numbers }}</span>
+          <span class="patent-desc">{{ p.desc }}</span>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <!-- Publications & Standards -->
+    <div class="research-subsection">
+      <h3>Publications &amp; Standards</h3>
+      <ol class="pub-list" role="list">
+        {% for pub in publications %}
+        <li class="pub-item">
+          <span class="pub-year">{{ pub.year }}</span>
+          <div class="pub-body">
+            <p class="pub-text">
+              {% if pub.url %}
+              <a href="{{ pub.url }}" target="_blank" rel="noopener noreferrer">{{ pub.text }}</a>
+              {% else %}
+              {{ pub.text }}
+              {% endif %}
+            </p>
+            {% if pub.role %}
+            <p class="pub-role">{{ pub.role }}</p>
+            {% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     Demos
+     ========================================================================= -->
+<section id="demos" aria-labelledby="demos-heading">
+  <div class="container">
+    <span class="section-label">Interactive Tools</span>
+    <h2 class="section-title" id="demos-heading">Demos</h2>
+    <p class="section-intro">Small browser-based tools built for specific engineering problems.</p>
+
+    <p class="demos-coming-soon">Coming soon.</p>
+  </div>
+</section>
+
+<!-- =========================================================================
+     Contact
+     ========================================================================= -->
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title" id="contact-heading">Contact</h2>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>
+          I am available for consulting engagements and senior technical roles.
+          If you have a problem at the boundary of wind energy engineering and
+          data infrastructure, I would be glad to discuss it.
+        </p>
+        <div class="contact-links">
+          <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <form id="contact-form" class="contact-form" novalidate>
+        <input type="hidden" name="_origin" value="https://gviolato.com" />
+        <input type="hidden" name="_hp" value="" style="display:none" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contact-name">Name <span aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              autocomplete="name"
+              required
+              placeholder="Your name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              autocomplete="email"
+              required
+              placeholder="your@email.com"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-org">Organisation</label>
+          <input
+            type="text"
+            id="contact-org"
+            name="organisation"
+            autocomplete="organization"
+            placeholder="Company or institution (optional)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="contact-message">Message <span aria-hidden="true">*</span></label>
+          <textarea
+            id="contact-message"
+            name="message"
+            required
+            placeholder="Describe your project or enquiry…"
+          ></textarea>
+        </div>
+
+        <!-- Cloudflare Turnstile -->
+        <!-- REPLACE: YOUR_TURNSTILE_SITE_KEY — get it at https://dash.cloudflare.com/turnstile -->
+        <div class="turnstile-wrapper">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAADco95YLiHSc_hqO" data-theme="light"></div>
+        </div>
+
+        <div class="form-submit">
+          <div id="form-message" class="form-message" role="alert" aria-live="polite"></div>
+          <button type="submit" id="form-submit" class="btn btn-primary btn-submit">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =========================================================================
+     Footer
+     ========================================================================= -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <p class="footer-copy">&copy; 2025 Gustavo Violato. All rights reserved.</p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
